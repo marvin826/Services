@@ -1,0 +1,23 @@
+{
+	"folders":
+	[
+		{
+			"path": "/home/gkaiser/Projects/Services/data"
+		},
+		{
+			"path": "/home/gkaiser/Projects/Services/logs"
+		},
+		{
+			"path": "/home/gkaiser/Projects/Services/scripts"
+		},
+		{
+			"path": "/home/gkaiser/Projects/Services/src"
+		},
+		{
+			"path": "/home/gkaiser/Projects/Services/testbed"
+		},
+		{
+			"path": "/home/gkaiser/Projects/Services/workspace"
+		}
+	]
+}

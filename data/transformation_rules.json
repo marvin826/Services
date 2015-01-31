@@ -1,0 +1,17 @@
+{
+	"0013 a200 408b 4307" : 
+	[
+		{
+			"variables" : 
+				{
+					"${TEMP}" : "readings.temperature.value",
+					"${UNITS}" : "readings.temperature.units",
+					"${SUPPVOLTS}" : "supply_voltage.value",
+					"${TIME}" : "time_stamp"
+				},
+			"template" : "{ \"service\" : \"kaiserw\", \"message\" : \"Current temp from Aurora: ${TEMP} ${UNITS} (${SUPPVOLTS}) ${TIME}\"}",
+			"topic" : "twitter_service",
+			"version" : 1.0
+		}
+	]
+}

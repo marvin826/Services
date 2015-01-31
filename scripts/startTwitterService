@@ -1,0 +1,15 @@
+#!/bin/bash
+
+TIMESTAMP=`date +%Y%m%d%H%M`
+
+SERVICESHOME=~/Projects/Services
+LOGFILE=${SERVICESHOME}/logs/messages_${TIMESTAMP}.log
+KEYFILE=${SERVICESHOME}/data/twitter_keys.json
+
+
+source ${SERVICESHOME}/testbed/bin/activate
+
+python ${SERVICESHOME}/src/TwitterServiceTester.py \
+	--logFile ${LOGFILE} \
+	--keyFile ${KEYFILE} &
+

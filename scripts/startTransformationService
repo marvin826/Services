@@ -1,0 +1,16 @@
+#!/bin/bash
+
+TIMESTAMP=`date +%Y%m%d%H%M`
+
+SERVICESHOME=~/Projects/Services
+LOGFILE=${SERVICESHOME}/logs/transform_log_${TIMESTAMP}.log
+RULESFILE=${SERVICESHOME}/data/transformation_rules.json
+
+
+source ${SERVICESHOME}/testbed/bin/activate
+
+python ${SERVICESHOME}/src/TransformationServiceTester.py \
+	--logFile ${LOGFILE} \
+	--rulesFile ${RULESFILE}
+
+

@@ -4,10 +4,10 @@
 		{
 			"variables" : 
 				{
-					"${TEMP}" : "readings.temperature.value",
-					"${UNITS}" : "readings.temperature.units",
-					"${SUPPVOLTS}" : "supply_voltage.value",
-					"${TIME}" : "time_stamp"
+					"${TEMP}" : { "path" : "readings.temperature.value", "format" : "{0:03.1f}" },
+					"${UNITS}" : { "path" : "readings.temperature.units" },
+					"${SUPPVOLTS}" : { "path" : "supply_voltage.value", "format" : "{0:03.2f}" },
+					"${TIME}" : { "path" : "time_stamp", "selector" : "[01][0-9]:[0-5][0-9]:[0-5][0-9]" }
 				},
 			"template" : "{ \"service\" : \"kaiserw\", \"message\" : \"Current temp from Aurora: ${TEMP} ${UNITS} (${SUPPVOLTS}) ${TIME}\"}",
 			"topic" : "twitter_service",

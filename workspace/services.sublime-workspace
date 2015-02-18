@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"m_",
+				"m_PacketQueue"
+			],
+			[
+				"mX",
+				"m_XBeeReader"
+			],
+			[
+				"M",
+				"m_XBeeConnection"
+			],
+			[
+				"m_X",
+				"m_XBeeConnection"
+			],
+			[
+				"tem",
+				"temperatureLog"
+			],
+			[
+				"out",
+				"outTopic"
+			],
+			[
 				"Twi",
 				"TwitterService"
 			],
@@ -84,10 +108,6 @@
 				"temp_object"
 			],
 			[
-				"tem",
-				"temperatureJSON"
-			],
-			[
 				"mqtt",
 				"mqttc"
 			],
@@ -113,35 +133,26 @@
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/data/transformation_rules.json",
+			"file": "/home/gkaiser/Projects/Services/scripts/startXbeeEndpointService",
 			"settings":
 			{
-				"buffer_size": 429,
+				"buffer_size": 461,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/src/TwitterService.py",
+			"file": "/home/gkaiser/Projects/Services/src/ServiceBase.py",
 			"settings":
 			{
-				"buffer_size": 3715,
-				"line_ending": "Unix",
-				"name": "import ConsumerBase as cb"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Services/src/TwitterServiceTester.py",
-			"settings":
-			{
-				"buffer_size": 174,
+				"buffer_size": 2165,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/src/TransformationServiceTester.py",
+			"file": "/home/gkaiser/Projects/Services/src/XbeeEndpointServiceTester.py",
 			"settings":
 			{
-				"buffer_size": 195,
+				"buffer_size": 170,
 				"line_ending": "Unix"
 			}
 		},
@@ -149,31 +160,23 @@
 			"file": "/home/gkaiser/Projects/Services/src/TransformationService.py",
 			"settings":
 			{
-				"buffer_size": 3599,
+				"buffer_size": 4248,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/scripts/startTwitterService",
+			"file": "/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
 			"settings":
 			{
-				"buffer_size": 327,
+				"buffer_size": 3481,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/scripts/startTransformationService",
+			"file": "/home/gkaiser/Projects/Services/src/WeatherService.py",
 			"settings":
 			{
-				"buffer_size": 352,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Services/src/ConsumerBase.py",
-			"settings":
-			{
-				"buffer_size": 2240,
+				"buffer_size": 3448,
 				"line_ending": "Unix"
 			}
 		}
@@ -210,14 +213,18 @@
 	},
 	"file_history":
 	[
+		"/home/gkaiser/Projects/Services/scripts/startTransformationService",
+		"/home/gkaiser/Projects/Services/src/TwitterService.py",
+		"/home/gkaiser/Projects/Services/src/TwitterServiceTester.py",
 		"/home/gkaiser/Projects/Services/src/TransformationServiceTester.py",
+		"/home/gkaiser/Projects/Services/data/transformation_rules.json",
+		"/home/gkaiser/Projects/Services/scripts/startTwitterService",
 		"/home/gkaiser/Projects/Services/data/twitter_rules.json",
 		"/home/gkaiser/Projects/Services/src/ConsumerBase.py",
 		"/home/gkaiser/Projects/MQTT/source/test_consumer.py",
 		"/home/gkaiser/Projects/Services/src/ConsumerBaseTester.py",
 		"/home/gkaiser/Projects/Services/src/SupplyVoltageService.py",
 		"/home/gkaiser/Projects/ZigBee/application/src/TwitterHelper.py",
-		"/home/gkaiser/Projects/Services/src/TwitterServiceTester.py",
 		"/home/gkaiser/Projects/ZigBee/application/src/XbeeMain.py",
 		"/home/gkaiser/Projects/Services/src/SupplyVoltageServiceTester.py",
 		"/home/gkaiser/Projects/ZigBee/application/src/WeatherPlugin.py",
@@ -288,6 +295,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"print",
+			"connect",
+			"self.topic",
+			"subscribe",
+			"message_log",
+			"reader",
+			"XbeeEnpointService",
+			"twitterService",
+			"temperature_log",
+			"ConsumerBase",
+			"service",
+			"Service",
+			"service",
+			"print",
 			"variables",
 			"rules",
 			"twitter",
@@ -364,26 +385,25 @@
 				},
 				{
 					"buffer": 1,
-					"file": "/home/gkaiser/Projects/Services/data/transformation_rules.json",
+					"file": "/home/gkaiser/Projects/Services/scripts/startXbeeEndpointService",
 					"settings":
 					{
-						"buffer_size": 429,
+						"buffer_size": 461,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								240,
-								240
+								433,
+								433
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
 						},
-						"translation.x": 96.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -391,72 +411,45 @@
 				},
 				{
 					"buffer": 2,
-					"file": "/home/gkaiser/Projects/Services/src/TwitterService.py",
+					"file": "/home/gkaiser/Projects/Services/src/ServiceBase.py",
 					"settings":
 					{
-						"buffer_size": 3715,
+						"buffer_size": 2165,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2260,
-								2260
+								716,
+								716
 							]
 						],
 						"settings":
 						{
-							"auto_name": "import ConsumerBase as cb",
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1479.0,
+						"translation.y": 338.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "/home/gkaiser/Projects/Services/src/TwitterServiceTester.py",
+					"file": "/home/gkaiser/Projects/Services/src/XbeeEndpointServiceTester.py",
 					"settings":
 					{
-						"buffer_size": 174,
+						"buffer_size": 170,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								127,
-								127
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/home/gkaiser/Projects/Services/src/TransformationServiceTester.py",
-					"settings":
-					{
-						"buffer_size": 195,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
+								170,
+								170
 							]
 						],
 						"settings":
@@ -472,23 +465,23 @@
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
-					"buffer": 5,
+					"buffer": 4,
 					"file": "/home/gkaiser/Projects/Services/src/TransformationService.py",
 					"settings":
 					{
-						"buffer_size": 3599,
+						"buffer_size": 4248,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2725,
-								2725
+								4196,
+								4196
 							]
 						],
 						"settings":
@@ -497,86 +490,62 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 316.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
+					"settings":
+					{
+						"buffer_size": 3481,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2451,
+								2456
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1222.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 6,
-					"file": "/home/gkaiser/Projects/Services/scripts/startTwitterService",
+					"file": "/home/gkaiser/Projects/Services/src/WeatherService.py",
 					"settings":
 					{
-						"buffer_size": 327,
+						"buffer_size": 3448,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								327,
-								327
+								254,
+								254
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "/home/gkaiser/Projects/Services/scripts/startTransformationService",
-					"settings":
-					{
-						"buffer_size": 352,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								350,
-								350
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "/home/gkaiser/Projects/Services/src/ConsumerBase.py",
-					"settings":
-					{
-						"buffer_size": 2240,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2216,
-								2216
-							]
-						],
-						"settings":
-						{
+							"auto_name": "",
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1224.0,
+						"translation.y": 1853.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -617,7 +586,7 @@
 		"rows":
 		[
 			0.0,
-			0.591592730551,
+			0.500927570089,
 			1.0
 		]
 	},
@@ -640,6 +609,10 @@
 		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"",
+				"/home/gkaiser/Projects/ZigBee/application/workspace/xbee_application.sublime-project"
+			]
 		],
 		"width": 380.0
 	},

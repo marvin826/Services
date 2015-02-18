@@ -1,9 +1,10 @@
-import ConsumerBase as cb 
+import ServiceBase as sb 
 import argparse
 import json
 import string
+import re
 
-class TransformationService(cb.ConsumerBase):
+class TransformationService(sb.ServiceBase):
 	"""docstring for TransformationService"""
 	def __init__(self):
 		super(TransformationService, self).__init__()
@@ -56,6 +57,7 @@ class TransformationService(cb.ConsumerBase):
 						self.logger.debug(logMsg)
 
 	def parseArguments(self):
+		super(TransformationService, self).parseArguments()
 		
 		parser = argparse.ArgumentParser(description="TransformationService")
 		parser.add_argument('--logFile', 
@@ -79,7 +81,15 @@ class TransformationService(cb.ConsumerBase):
 			value = variables[key]
 			self.logger.debug(key + " : " + str(variables[key]))
 
-			path = string.split(value, '.')
+			path = None
+			if "path" in value:
+				path = value["path"]
+			else:
+				logMsg = "TransformationService.processVariables : Error : \n" \
+				         + "\"path\" not found in variable description."
+				self.logger.critical(logMsg)
+
+			path = string.split(path, '.')
 			obj = msg
 			for token in path:
 				if token in obj:
@@ -89,6 +99,19 @@ class TransformationService(cb.ConsumerBase):
 						+ "'" + token + "' token from path '" + value \
 						+ "' not found in message : " + str(msg)
 					self.logger.critical(logMsg)
+					break
+
+			if "selector" in value:
+				selector = re.compile(value["selector"])
+				match = selector.search(obj)
+				if match is not None:
+					obj = match.group(0)
+
+			if "format" in value:
+				formatStr = value["format"]
+				obj = formatStr.format(obj)
+			else:
+				obj = str(obj)
 			results[key] = obj
 
 		self.logger.debug("Variables: ")
@@ -114,11 +137,12 @@ class TransformationService(cb.ConsumerBase):
 		return message
 
 
-	def publishMessage(self, message, service):
+	def publishMessage(self, message, topic):
 		
-		print "TransformationService.publishMessage : "
-		print message
-		print service
+		logMsg = "TransformationService.publishMessage : \n" \
+		         + str(message) + "\n" \
+		         + str(topic) + "\n"
+		self.logger.debug(logMsg)
 
-		self.client.publish(str(service), str(message))
+		self.client.publish(str(topic), str(message))
 		

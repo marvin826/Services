@@ -11,6 +11,6 @@ source ${SERVICESHOME}/testbed/bin/activate
 
 python ${SERVICESHOME}/src/TransformationServiceTester.py \
 	--logFile ${LOGFILE} \
-	--rulesFile ${RULESFILE}
+	--rulesFile ${RULESFILE} &
 
 

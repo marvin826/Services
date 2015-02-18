@@ -3,7 +3,7 @@
 TIMESTAMP=`date +%Y%m%d%H%M`
 
 SERVICESHOME=~/Projects/Services
-LOGFILE=${SERVICESHOME}/logs/messages_${TIMESTAMP}.log
+LOGFILE=${SERVICESHOME}/logs/twitter_service_${TIMESTAMP}.log
 KEYFILE=${SERVICESHOME}/data/twitter_keys.json
 
 

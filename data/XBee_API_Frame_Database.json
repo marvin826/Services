@@ -1,0 +1,63 @@
+[
+    {
+        "type" : 146,
+        "description" : "ZigBee IO Data Sample Rx Indicator",
+        "formats" :
+            [ 
+                {
+                    "type"   : "XBeeAddress",
+                    "name"   : "64-bit Source Address",
+                    "offset" : 4,
+                    "length" : 8
+                },
+                {
+                    "type"   : "XBeeAddress",
+                    "name"   : "16-bit Source Network Address",
+                    "offset" : 12,
+                    "length" : 2
+                },
+                {
+                    "type"   : "XBeeInt",
+                    "name"   : "Receive Options",
+                    "offset" : 14,
+                    "length" : 1
+                },
+                {
+                    "type"   : "XBeeInt",
+                    "name"   : "Number of Samples",
+                    "offset" : 15,
+                    "length" : 1
+                },
+                {
+                    "type" : "XBeeBitField",
+                    "name" : "Digital Samples",
+                    "mask offset" : 16,
+                    "mask length" : 2,
+                    "field type" : "fixed",
+                    "field offset" : 19,
+                    "field length" : 2,
+                    "sample size" : 1,
+                    "sample names" : 
+                        [ "AD0/DI O0", "AD1/DI O1", "AD2/DI O2", "AD3/DI O3",
+                          "DIO4", "ASSOC/DIO5", "RTS/DI O6", "CTS/DI O7",
+                          "None", "None", "RSSI/DI O10", "PWM/DI O11",
+                          "CD/DIC 12", "None", "None", "None"]
+                },
+                {
+                    "type" : "XBeeBitField",
+                    "name" : "Analog Samples",
+                    "mask offset" : 18,
+                    "mask length" : 1,
+                    "mask order" : "reverse",
+                    "field type" : "variable",
+                    "field offset" : 19,
+                    "field length" : 2,
+                    "sample size" : 16,
+                    "sample names" :
+                        [ "AD0", "AD1", "AD2", "AD3",
+                          "None", "None", "None", "Supply Voltage" ],
+                    "field offset eq" : "self._mFieldOffset + len(packet['Digital Samples']['raw samples'])"
+                }
+            ]
+    }
+]

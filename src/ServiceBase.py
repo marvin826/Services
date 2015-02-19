@@ -70,6 +70,7 @@ class ServiceBase(object):
 		return None
 
 	def createMessageLog(self):
+
 		message_log = logging.getLogger("messages")
 		m_formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 		m_log_file = logging.FileHandler(self.arguments.logFile)
@@ -77,6 +78,6 @@ class ServiceBase(object):
 		m_streamHandler = logging.StreamHandler()
 		message_log.addHandler(m_log_file)
 		message_log.addHandler(m_streamHandler)
-		message_log.setLevel(logging.INFO)
+		message_log.setLevel(self.arguments.loggingLevel.upper())
 
 		return message_log

@@ -117,6 +117,9 @@ class TwitterService(sb.ServiceBase):
 		parser.add_argument('--logFile', 
 							required=True,
 			                help="Path to file where log messages are directed")
+		parser.add_argument('--loggingLevel', 
+							required=False, default="INFO",
+			                help="Level of logging to capture (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
 		parser.add_argument('--keyFile', 
 							required=True,
 			                help="File that contains keys for Twitter accounts")

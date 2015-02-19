@@ -1,0 +1,18 @@
+#!/bin/bash
+
+TIMESTAMP=`date +%Y%m%d%H%M`
+
+SERVICESHOME=~/Projects/Services
+LOGFILE=${SERVICESHOME}/logs/weather_service_${TIMESTAMP}.log
+LOGGINGLEVEL="INFO"
+TEMPERATURELOGFILE=${SERVICESHOME}/logs/temperatures_${TIMESTAMP}.csv
+OUTTOPIC="xbee.sensor_reading"
+
+source ${SERVICESHOME}/testbed/bin/activate
+
+python ${SERVICESHOME}/src/WeatherServiceTester.py \
+	--logFile ${LOGFILE} \
+	--loggingLevel ${LOGGINGLEVEL} \
+	--temperatureLogFile ${TEMPERATURELOGFILE} \
+	--outTopic ${OUTTOPIC} &
+

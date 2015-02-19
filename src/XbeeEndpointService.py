@@ -53,6 +53,9 @@ class XbeeEndpointService(sb.ServiceBase):
 		parser.add_argument('--logFile', 
 							required=True,
 			                help="Path to file where log messages are directed")
+		parser.add_argument('--loggingLevel', 
+							required=False, default="INFO",
+			                help="Level of logging to capture (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
 		parser.add_argument('--frameDBFile', 
 							required=True,
 			                help="Path to frame database for XBeeFramework")
@@ -102,12 +105,12 @@ class XbeeEndpointService(sb.ServiceBase):
 
 	def onMessage(self, client, userdata, msg):
 
-		print "XbeeEndpointService.onMessage"
-		print msg.topic + " " + str(msg.payload)
+		logMsg = "XbeeEndpointService.onMessage" + msg.topic + " " + str(msg.payload)
+		self.logger.info(logMsg)
 
 	def handleXbeePacket(self, packet, env):
 
-		self.logger.info("XbeeEndpointService.handleXbeePacket")
+		self.logger.debug("XbeeEndpointService.handleXbeePacket")
 
 		# check the frame type and make sure it's what we want
 		frameType = packet["FrameType"]

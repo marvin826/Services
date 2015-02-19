@@ -1,6 +1,8 @@
 import ServiceBase as sb
 import argparse
+import logging
 import json
+import time
 
 class WeatherService(sb.ServiceBase):
 	"""docstring for WeatherService"""
@@ -8,10 +10,8 @@ class WeatherService(sb.ServiceBase):
 		super(WeatherService, self).__init__()
 		
 		self.temperatureLog = None
-		self.temperatureLogName = None
+		self.temperatureLogFile = None
 		self.outTopic = None
-
-		pass
 
 	def init(self):
 		super(WeatherService, self).init()
@@ -19,12 +19,12 @@ class WeatherService(sb.ServiceBase):
 		self.logger.debug("WeatherService.init")
 
 		# grab my arguments
-		self.temperatureLogName = self.arguments.temperatureLogName
+		self.temperatureLogFile = self.arguments.temperatureLogFile
 		self.outTopic = self.arguments.outTopic
 
 		# setup the temperature log		
 		temperatureLog = logging.getLogger("temperatures")
-		t_log_file = logging.FileHandler(self.temperatureLogName)
+		t_log_file = logging.FileHandler(self.temperatureLogFile)
 		temperatureLog.addHandler(t_log_file)
 		temperatureLog.setLevel(logging.INFO)
 		self.temperatureLog = temperatureLog
@@ -80,7 +80,7 @@ class WeatherService(sb.ServiceBase):
 		readings["temperature"] = { "value" : tempReading, "units" : "degrees F" }
 		messageObject["readings"] = readings
 
-		publishMessage(json.dumps(messageObject), self.outTopic)
+		self.publishMessage(json.dumps(messageObject), self.outTopic)
 
 
 	def parseArguments(self):
@@ -90,6 +90,9 @@ class WeatherService(sb.ServiceBase):
 		parser.add_argument('--logFile', 
 							required=True,
 			                help="Path to file where log messages are directed")
+		parser.add_argument('--loggingLevel', 
+							required=False, default="INFO",
+			                help="Level of logging to capture (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
 		parser.add_argument('--temperatureLogFile', 
 							required=True,
 			                help="Path to file where temperatures are logged")
@@ -108,3 +111,4 @@ class WeatherService(sb.ServiceBase):
 		self.logger.debug(logMsg)
 
 		self.client.publish(str(topic), str(message))
+

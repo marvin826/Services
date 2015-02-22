@@ -5,11 +5,17 @@ TIMESTAMP=`date +%Y%m%d%H%M`
 SERVICESHOME=~/Projects/Services
 LOGFILE=${SERVICESHOME}/logs/twitter_service_${TIMESTAMP}.log
 KEYFILE=${SERVICESHOME}/data/twitter_keys.json
+MESSAGEQUEUETOPIC="services.twitter"
+MESSAGEQUEUEADDRESS="127.0.0.1"
+MESSAGEQUEUEPORT=5250
 
 
 source ${SERVICESHOME}/testbed/bin/activate
 
 python ${SERVICESHOME}/src/TwitterServiceTester.py \
 	--logFile ${LOGFILE} \
+	--messageQueueTopic ${MESSAGEQUEUETOPIC} \
+	--messageQueueAddress ${MESSAGEQUEUEADDRESS} \
+	--messageQueuePort ${MESSAGEQUEUEPORT} \
 	--keyFile ${KEYFILE} &
 

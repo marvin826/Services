@@ -5,8 +5,11 @@ TIMESTAMP=`date +%Y%m%d%H%M`
 SERVICESHOME=~/Projects/Services
 LOGFILE=${SERVICESHOME}/logs/xbee_endpoint_log_${TIMESTAMP}.log
 FRAMEDBFILE=${SERVICESHOME}/data/XBee_API_Frame_Database.json
-XBEETOPIC="xbee.packet"
+XBEETOPIC="services.xbee.packet"
 COMMPORT=/dev/ttyS0
+MESSAGEQUEUETOPIC="services.xbee.endpoint"
+MESSAGEQUEUEADDRESS="127.0.0.1"
+MESSAGEQUEUEPORT=5250
 
 source ${SERVICESHOME}/testbed/bin/activate
 
@@ -14,5 +17,8 @@ python ${SERVICESHOME}/src/XbeeEndpointServiceTester.py \
 	--logFile ${LOGFILE} \
 	--frameDBFile ${FRAMEDBFILE} \
 	--xbeeTopic ${XBEETOPIC} \
+	--messageQueueTopic ${MESSAGEQUEUETOPIC} \
+	--messageQueueAddress ${MESSAGEQUEUEADDRESS} \
+	--messageQueuePort ${MESSAGEQUEUEPORT} \
 	--commPort ${COMMPORT} &
 

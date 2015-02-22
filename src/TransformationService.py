@@ -56,22 +56,12 @@ class TransformationService(sb.ServiceBase):
 						logMsg = "TransformationService.onMessage : 'service' not found"
 						self.logger.debug(logMsg)
 
-	def parseArguments(self):
-		super(TransformationService, self).parseArguments()
+	def addArguments(self):
+		super(TransformationService, self).addArguments()
 		
-		parser = argparse.ArgumentParser(description="TransformationService")
-		parser.add_argument('--logFile', 
-							required=True,
-			                help="Path to file where log messages are directed")
-		parser.add_argument('--loggingLevel', 
-							required=False, default="INFO",
-			                help="Level of logging to capture (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
-		parser.add_argument('--rulesFile', 
-							required=True,
-			                help="Path to file transformation rules are defined")
-		arguments = parser.parse_args()
-
-		return arguments	
+		self.argumentParser.add_argument('--rulesFile', 
+							             required=True,
+			                             help="Path to file transformation rules are defined")
 		
 	def processVariables(self, address, variables, msg):
 		

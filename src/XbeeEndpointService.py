@@ -18,6 +18,8 @@ class XbeeEndpointService(sb.ServiceBase):
 		self.m_PacketQueue = Queue.Queue()
 		self.m_MessageQueue = Queue.Queue()
 
+		self.argDescription = "XbeeEndpointService"
+
 		return
 
 	def init(self):
@@ -46,28 +48,20 @@ class XbeeEndpointService(sb.ServiceBase):
 
 		return
 
-	def parseArguments(self):
-		super(XbeeEndpointService, self).parseArguments()
-		
-		parser = argparse.ArgumentParser(description="XbeeEndpointService")
-		parser.add_argument('--logFile', 
-							required=True,
-			                help="Path to file where log messages are directed")
-		parser.add_argument('--loggingLevel', 
-							required=False, default="INFO",
-			                help="Level of logging to capture (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
-		parser.add_argument('--frameDBFile', 
-							required=True,
-			                help="Path to frame database for XBeeFramework")
-		parser.add_argument('--xbeeTopic', 
-							required=True,
-			                help="Topic used to send out recieved Xbee packets")
-		parser.add_argument('--commPort', 
-							required=True,
-			                help="Port Xbee radio is connected to")
-		arguments = parser.parse_args()
+	def addArguments(self):
+		super(XbeeEndpointService, self).addArguments()
 
-		return arguments
+		print "XbeeEndpointService.addArguments"
+
+		self.argumentParser.add_argument('--frameDBFile', 
+									     required=True,
+			                             help="Path to frame database for XBeeFramework")
+		self.argumentParser.add_argument('--xbeeTopic', 
+							             required=True,
+			                             help="Topic used to send out recieved Xbee packets")
+		self.argumentParser.add_argument('--commPort', 
+							             required=True,
+			                             help="Port Xbee radio is connected to")
 
 	def runXBeeThread(self, threadID):
 

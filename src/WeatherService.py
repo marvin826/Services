@@ -82,26 +82,15 @@ class WeatherService(sb.ServiceBase):
 
 		self.publishMessage(json.dumps(messageObject), self.outTopic)
 
-
-	def parseArguments(self):
-		super(WeatherService, self).parseArguments()
+	def addArguments(self):
+		super(WeatherService, self).addArguments()
 		
-		parser = argparse.ArgumentParser(description="WeatherService")
-		parser.add_argument('--logFile', 
-							required=True,
-			                help="Path to file where log messages are directed")
-		parser.add_argument('--loggingLevel', 
-							required=False, default="INFO",
-			                help="Level of logging to capture (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
-		parser.add_argument('--temperatureLogFile', 
-							required=True,
-			                help="Path to file where temperatures are logged")
-		parser.add_argument('--outTopic', 
-							required=True,
-			                help="MQTT topic used to send out weather messages")
-		arguments = parser.parse_args()
-
-		return arguments	
+		self.argumentParser.add_argument('--temperatureLogFile', 
+							             required=True,
+			                             help="Path to file where temperatures are logged")
+		self.argumentParser.add_argument('--outTopic', 
+							             required=True,
+			                             help="MQTT topic used to send out weather messages")
 
 	def publishMessage(self, message, topic):
 

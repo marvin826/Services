@@ -9,10 +9,25 @@ class ServiceBase(object):
 
 		self.client = None
 		self.topic = None
-		self.arguments = self.parseArguments()
-		self.logger = self.createMessageLog()
+		self.arguments = None
+		self.argumentParser = None
+		self.argDescription = "ServiceBase"
+
 
 	def init(self):
+
+		# setup argument parser
+		# initialize the parser, add arguments to the parser,
+		# then parse the arguments
+		# split out into three functions for children to 
+		# override
+		self.initArgParse()
+		self.addArguments()
+		self.parseArguments()
+
+		# create the logger for the service
+		self.logger = self.createMessageLog()
+
 		self.client = mqttc.Client()
 
 		def connectCB(client, userdata, rc) :
@@ -37,22 +52,25 @@ class ServiceBase(object):
 			self.logger.debug("ServiceBase.onMessage")
 			self.logger.debug(msg.topic + " " + str(msg.payload))
 
-	def connect(self, topic, address, port, timeout=60):
+	def connect(self, timeout=60):
 
 		if self.logger is not None:
 			self.logger.debug("ServiceBase.connect")
-			self.logger.debug("Connect : " + str(topic) + " " + str(address) + " " + str(port))
+			self.logger.debug("Connect : " + str(self.arguments.messageQueueTopic) + " " + \
+				              str(self.arguments.messageQueueAddress) + " " + \
+				              str(self.arguments.messageQueuePort))
 
 		if self.client is None:
 			if self.logger is not None:
 				self.logger.critical("ServiceBase.connect : MQTT client is None")
 			return
 			
-		self.client.will_set("/event/dropped", "Sorry, I seem to have died.")
-		self.topic = topic
+		self.client.will_set("services.event.dropped", "Sorry, I seem to have died.")
+		self.topic = self.arguments.messageQueueTopic
 
 		try :
-			self.client.connect(address, port, timeout)
+			self.client.connect(self.arguments.messageQueueAddress, 
+				                self.arguments.messageQueuePort, timeout)
 		except Exception, e:
 			if self.logger is not None:
 				self.logger.critical("ServiceBase.connect : Error : " + str(e))
@@ -65,9 +83,31 @@ class ServiceBase(object):
 
 		self.client.loop_forever()
 
+	def initArgParse(self):
+
+		self.argumentParser = argparse.ArgumentParser(self.argDescription)
+
+	def addArguments(self):
+
+		self.argumentParser.add_argument('--logFile', 
+										 required=True,
+			                             help="Path to file where log messages are directed")
+		self.argumentParser.add_argument('--loggingLevel', 
+										 required=False, default="INFO",
+			                             help="Level of logging to capture (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
+		self.argumentParser.add_argument('--messageQueueTopic', 
+										 required=True,
+			                             help="Topic service listens on for incoming messages")
+		self.argumentParser.add_argument('--messageQueueAddress', 
+										 required=False, default="127.0.0.1",
+			                             help="Address of message broker used for messaging")
+		self.argumentParser.add_argument('--messageQueuePort', 
+										 required=False, default="5250",
+			                             help="Port of message broker used for messaging")
+
 	def parseArguments(self):
 
-		return None
+		self.arguments = self.argumentParser.parse_args()
 
 	def createMessageLog(self):
 

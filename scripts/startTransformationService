@@ -4,13 +4,20 @@ TIMESTAMP=`date +%Y%m%d%H%M`
 
 SERVICESHOME=~/Projects/Services
 LOGFILE=${SERVICESHOME}/logs/transform_log_${TIMESTAMP}.log
+LOGGINGLEVEL="INFO"
 RULESFILE=${SERVICESHOME}/data/transformation_rules.json
-
+MESSAGEQUEUETOPIC="services.xbee.sensor_readings"
+MESSAGEQUEUEADDRESS="127.0.0.1"
+MESSAGEQUEUEPORT=5250
 
 source ${SERVICESHOME}/testbed/bin/activate
 
 python ${SERVICESHOME}/src/TransformationServiceTester.py \
 	--logFile ${LOGFILE} \
-	--rulesFile ${RULESFILE} &
+	--loggingLevel ${LOGGINGLEVEL} \
+	--rulesFile ${RULESFILE} \
+	--messageQueueTopic ${MESSAGEQUEUETOPIC} \
+	--messageQueueAddress ${MESSAGEQUEUEADDRESS} \
+	--messageQueuePort ${MESSAGEQUEUEPORT} &
 
 

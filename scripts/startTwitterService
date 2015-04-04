@@ -17,5 +17,5 @@ python ${SERVICESHOME}/src/TwitterServiceTester.py \
 	--messageQueueTopic ${MESSAGEQUEUETOPIC} \
 	--messageQueueAddress ${MESSAGEQUEUEADDRESS} \
 	--messageQueuePort ${MESSAGEQUEUEPORT} \
-	--keyFile ${KEYFILE} &
+	--keyFile ${KEYFILE}
 

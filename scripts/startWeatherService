@@ -6,7 +6,7 @@ SERVICESHOME=~/Projects/Services
 LOGFILE=${SERVICESHOME}/logs/weather_service_${TIMESTAMP}.log
 LOGGINGLEVEL="INFO"
 TEMPERATURELOGFILE=${SERVICESHOME}/logs/temperatures_${TIMESTAMP}.csv
-OUTTOPIC="services.xbee.sensor_readings"
+OUTTOPIC="services.xbee.readings"
 MESSAGEQUEUETOPIC="services.xbee.packet"
 MESSAGEQUEUEADDRESS="127.0.0.1"
 MESSAGEQUEUEPORT=5250
@@ -20,5 +20,6 @@ python ${SERVICESHOME}/src/WeatherServiceTester.py \
 	--messageQueueTopic ${MESSAGEQUEUETOPIC} \
 	--messageQueueAddress ${MESSAGEQUEUEADDRESS} \
 	--messageQueuePort ${MESSAGEQUEUEPORT} \
-	--outTopic ${OUTTOPIC} &
+	--outTopic ${OUTTOPIC}
 
+s

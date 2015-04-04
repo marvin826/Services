@@ -6,7 +6,7 @@ SERVICESHOME=~/Projects/Services
 LOGFILE=${SERVICESHOME}/logs/transform_log_${TIMESTAMP}.log
 LOGGINGLEVEL="INFO"
 RULESFILE=${SERVICESHOME}/data/transformation_rules.json
-MESSAGEQUEUETOPIC="services.xbee.sensor_readings"
+MESSAGEQUEUETOPIC="services.xbee.readings"
 MESSAGEQUEUEADDRESS="127.0.0.1"
 MESSAGEQUEUEPORT=5250
 
@@ -18,6 +18,6 @@ python ${SERVICESHOME}/src/TransformationServiceTester.py \
 	--rulesFile ${RULESFILE} \
 	--messageQueueTopic ${MESSAGEQUEUETOPIC} \
 	--messageQueueAddress ${MESSAGEQUEUEADDRESS} \
-	--messageQueuePort ${MESSAGEQUEUEPORT} &
+	--messageQueuePort ${MESSAGEQUEUEPORT}
 
 

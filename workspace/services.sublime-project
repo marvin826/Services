@@ -18,6 +18,12 @@
 		},
 		{
 			"path": "/home/gkaiser/Projects/Services/workspace"
+		},
+		{
+			"path": "/home/gkaiser/Projects/Services/test/src"
+		},
+		{
+			"path": "/home/gkaiser/Projects/Services/database/tables"
 		}
 	]
 }

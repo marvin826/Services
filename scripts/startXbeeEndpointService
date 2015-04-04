@@ -20,5 +20,5 @@ python ${SERVICESHOME}/src/XbeeEndpointServiceTester.py \
 	--messageQueueTopic ${MESSAGEQUEUETOPIC} \
 	--messageQueueAddress ${MESSAGEQUEUEADDRESS} \
 	--messageQueuePort ${MESSAGEQUEUEPORT} \
-	--commPort ${COMMPORT} &
+	--commPort ${COMMPORT}
 

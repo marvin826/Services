@@ -1,0 +1,24 @@
+#!/bin/bash
+
+TIMESTAMP=`date +%Y%m%d%H%M`
+
+SERVICESHOME=~/Projects/Services
+LOGFILE=${SERVICESHOME}/logs/garage_service_${TIMESTAMP}.log
+LOGGINGLEVEL="INFO"
+GARAGELOGFILE=${SERVICESHOME}/logs/garage_readings_${TIMESTAMP}.csv
+OUTTOPIC="services.xbee.readings"
+MESSAGEQUEUETOPIC="services.xbee.packet"
+MESSAGEQUEUEADDRESS="127.0.0.1"
+MESSAGEQUEUEPORT=5250
+
+source ${SERVICESHOME}/testbed/bin/activate
+
+python ${SERVICESHOME}/src/GarageServiceTester.py \
+	--logFile ${LOGFILE} \
+	--loggingLevel ${LOGGINGLEVEL} \
+	--garageLogFile ${GARAGELOGFILE} \
+	--messageQueueTopic ${MESSAGEQUEUETOPIC} \
+	--messageQueueAddress ${MESSAGEQUEUEADDRESS} \
+	--messageQueuePort ${MESSAGEQUEUEPORT} \
+	--outTopic ${OUTTOPIC}
+

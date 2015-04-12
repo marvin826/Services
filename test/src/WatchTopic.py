@@ -1,10 +1,16 @@
 import paho.mqtt.client as mqttc
 import argparse
 
-argumentParser = argparse.ArgumentParser("execute_sql_files")
+#
+# This is a utility function what will watch a given MQTT broker topic
+# and dump any messages received to stdout
+#
+
+argumentParser = argparse.ArgumentParser("WatchTopic")
 
 argumentParser.add_argument('--brokerAddress', 
-							required=True,
+							required=False,
+							default="127.0.0.1",
 			                help="IP address of MQTT broker for topic")
 
 argumentParser.add_argument('--brokerPort', 

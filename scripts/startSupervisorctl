@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# source the python virtual environment
+source ../supervisor_py/bin/activate
+
+
+# start supervisorctl
+echo "Starting supervisord..."
+supervisorctl -c ../data/supervisor.conf
+

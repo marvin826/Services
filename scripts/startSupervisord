@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# source the python virtual environment
+source ../supervisor_py/bin/activate
+
+# run the supervisord preprocessor
+python ../src/supervisorPreProcess.py --input ../data/supervisor.conf.template --output ../data/supervisor.conf
+
+# start supervisord
+echo "Starting supervisord..."
+supervisord -c ../data/supervisor.conf
+

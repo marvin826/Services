@@ -23,6 +23,25 @@ try:
 	# parse each section
 	pattern = re.compile("\[[a-zA-Z0-9\:\-_]+\]")
 	for line in infile:
+
+		# see if the line has a continuation marker at the end
+		# if so, merge with the next lines until we don't see a
+		# continuation marker
+		line = line.rstrip()
+		if line.endswith('\\') :
+			line = line[:-1]
+
+			for line2 in infile:
+				line2 = line2.rstrip()
+				line2 = line2.lstrip()
+				line = line + line2
+				
+				if line.endswith("\\") :
+					line = line[:-1]
+				else :
+					break
+
+		line = line + "\n"
 		match = pattern.match(line)
 		if match != None:
 			

@@ -8,6 +8,11 @@
 ;    variables can be expanded using this syntax: "%(ENV_HOME)s".
 ;  - Comments must have a leading space: "a=b ;comment" not "a=b;comment".
 
+[preprocessor]
+ROOTDIR=/home/gkaiser/Projects/Services
+LOGDIR=${ROOTDIR}/logs
+DATADIR=${ROOTDIR}/data
+
 [unix_http_server]
 file=/tmp/supervisor.sock   ; (the path to the socket file)
 ;chmod=0700                 ; socket file mode (default 0700)
@@ -54,27 +59,46 @@ serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
 
 ; mosquitto broker process
 [program:mosquitto_broker]
-command=/usr/sbin/mosquitto -p 5250
+command=/usr/sbin/mosquitto \
+         -p 5250
 
 ; Xbee Endpoint Service
 [program:xbee_endpoint_service]
-command=/home/gkaiser/Projects/Services/scripts/startXbeeEndpointService
+command=python ${ROOTDIR}/src/XbeeEndpointServiceTester.py \
+                   --logFile ${LOGDIR}/xbee_endpoint_log_${DTSTAMP="%Y%m%d%H%M"}.log  \
+                   --frameDBFile ${DATADIR}/XBee_API_Frame_Database.json \
+                   --xbeeTopic "services.xbee.packet" \
+                   --messageQueueTopic "services.xbee.endpoint" \
+                   --messageQueueAddress "127.0.0.1" \
+                   --messageQueuePort 5250 \
+                   --commPort /dev/ttyS0
+stderr_logfile = ${LOGDIR}/xbee_endpoint_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
+stdout_logfile = ${LOGDIR}/xbee_endpoint_transform_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
+
 
 ; Transformation Service
 [program:transformation_service]
-command=/home/gkaiser/Projects/Services/scripts/startTransformationService
+command = python python ${ROOTDIR}/src/TransformationServiceTester.py \
+                    --logFile ${LOGDIR}/transform_log_${DTSTAMP="%Y%m%d%H%M"}.log \
+                    --loggingLevel "INFO" \
+                    --rulesFile ${DATADIR}/transformation_rules.json \
+                    --messageQueueTopic "services.xbee.readings" \
+                    --messageQueueAddress "127.0.0.1" \
+                    --messageQueuePort 5250
+stderr_logfile = ${LOGDIR}/transform_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
+stdout_logfile = ${LOGDIR}/transform_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 
 ; Weather Service
 [program:weather_service]
-command=/home/gkaiser/Projects/Services/scripts/startWeatherService
+command=${ROOTDIR}/scripts/startWeatherService
 
 ; Garage Service
 [program:garage_service]
-command=/home/gkaiser/Projects/Services/scripts/startGarageService
+command=${ROOTDIR}/scripts/startGarageService
 
 ; Twitter Service
 [program:twitter_service]
-command=/home/gkaiser/Projects/Services/scripts/startTwitterService
+command=${ROOTDIR}/scripts/startTwitterService
 
 [group:services]
 programs=transformation_service,weather_service,twitter_service,xbee_endpoint_service,garage_service

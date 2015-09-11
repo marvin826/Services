@@ -160,45 +160,35 @@
 	"buffers":
 	[
 		{
-			"file": "/home/gkaiser/Projects/Services/database/src/execute_sql_files.py",
+			"file": "/home/gkaiser/Projects/Services/data/supervisord.conf.template",
 			"settings":
 			{
-				"buffer_size": 866,
-				"line_ending": "Unix",
-				"name": "a"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Services/database/seed_data/sensors_testbed.sql",
-			"settings":
-			{
-				"buffer_size": 203,
+				"buffer_size": 10514,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/data/transformation_rules.json",
+			"file": "/home/gkaiser/Projects/Services/scripts/startSupervisord",
 			"settings":
 			{
-				"buffer_size": 578,
+				"buffer_size": 324,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/test/src/TemperaturePumper.py",
+			"file": "/home/gkaiser/Projects/Services/data/supervisor.conf.template",
 			"settings":
 			{
-				"buffer_size": 2616,
+				"buffer_size": 11105,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/test/src/WatchTopic.py",
+			"file": "/home/gkaiser/Projects/Services/data/supervisor.conf",
 			"settings":
 			{
-				"buffer_size": 1101,
-				"line_ending": "Unix",
-				"name": "import mqtt"
+				"buffer_size": 11394,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -238,10 +228,14 @@
 	},
 	"file_history":
 	[
+		"/home/gkaiser/Projects/Services/database/src/execute_sql_files.py",
+		"/home/gkaiser/Projects/Services/database/seed_data/sensors_testbed.sql",
+		"/home/gkaiser/Projects/Services/data/transformation_rules.json",
+		"/home/gkaiser/Projects/Services/test/src/TemperaturePumper.py",
+		"/home/gkaiser/Projects/Services/test/src/WatchTopic.py",
 		"/home/gkaiser/Projects/Services/src/TransformationService.py",
 		"/home/gkaiser/Projects/Services/src/TwitterService.py",
 		"/home/gkaiser/Projects/Services/src/ServiceBase.py",
-		"/home/gkaiser/Projects/Services/data/transformation_rules.json",
 		"/home/gkaiser/Projects/Services/database/tables/voltage_readings.sql",
 		"/home/gkaiser/Projects/Services/database/tables/door_readings.sql",
 		"/home/gkaiser/Projects/Services/database/tables/light_readings.sql",
@@ -343,6 +337,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"garage",
+			"weather",
+			"mosquitto",
+			"SERVICESHOME",
+			"/home/gkaiser/Projects/Services/",
 			"table_file",
 			"weatherService",
 			"WeatherService",
@@ -413,57 +412,54 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/home/gkaiser/Projects/Services/database/src/execute_sql_files.py",
+					"file": "/home/gkaiser/Projects/Services/data/supervisord.conf.template",
 					"settings":
 					{
-						"buffer_size": 866,
+						"buffer_size": 10514,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								440,
-								440
+								4511,
+								4511
 							]
 						],
 						"settings":
 						{
-							"auto_name": "a",
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 144.0,
+						"translation.y": 1365.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/home/gkaiser/Projects/Services/database/seed_data/sensors_testbed.sql",
+					"file": "/home/gkaiser/Projects/Services/scripts/startSupervisord",
 					"settings":
 					{
-						"buffer_size": 203,
+						"buffer_size": 324,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								113,
-								113
+								70,
+								70
 							]
 						],
 						"settings":
 						{
-							"auto_name": "",
-							"syntax": "Packages/SQL/SQL.tmLanguage"
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -473,54 +469,56 @@
 				},
 				{
 					"buffer": 2,
-					"file": "/home/gkaiser/Projects/Services/data/transformation_rules.json",
+					"file": "/home/gkaiser/Projects/Services/data/supervisor.conf.template",
 					"settings":
 					{
-						"buffer_size": 578,
+						"buffer_size": 11105,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								578,
-								578
+								3297,
+								3297
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 6,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 816.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "/home/gkaiser/Projects/Services/test/src/TemperaturePumper.py",
+					"file": "/home/gkaiser/Projects/Services/data/supervisor.conf",
 					"settings":
 					{
-						"buffer_size": 2616,
+						"buffer_size": 11394,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2423,
-								2423
+								3042,
+								3042
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1461.0,
+						"translation.y": 867.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -528,37 +526,8 @@
 			]
 		},
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 4,
-					"file": "/home/gkaiser/Projects/Services/test/src/WatchTopic.py",
-					"settings":
-					{
-						"buffer_size": 1101,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								355,
-								355
-							]
-						],
-						"settings":
-						{
-							"auto_name": "import mqtt",
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 255.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],

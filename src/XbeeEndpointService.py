@@ -3,6 +3,7 @@ from xbeeframework import XBeeConnection as xbc
 from xbeeframework import XBeePacketHandler as xbph
 from xbeeframework import XBeeFrameDatabase as xbfdb
 import ServiceBase as sb
+import traceback
 import thread
 import argparse
 import json

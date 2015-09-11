@@ -160,42 +160,18 @@
 	"buffers":
 	[
 		{
-			"file": "/home/gkaiser/Projects/Services/data/supervisord.conf.template",
+			"file": "/home/gkaiser/Projects/Supervisor/data/supervisor.conf.template",
 			"settings":
 			{
-				"buffer_size": 10515,
+				"buffer_size": 1815,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/scripts/startSupervisord",
+			"file": "/home/gkaiser/Projects/Supervisor/src/supervisorPreProcess.py",
 			"settings":
 			{
-				"buffer_size": 324,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Services/data/supervisor.conf.template",
-			"settings":
-			{
-				"buffer_size": 12310,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
-			"settings":
-			{
-				"buffer_size": 3465,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Services/scripts/startGarageService",
-			"settings":
-			{
-				"buffer_size": 705,
+				"buffer_size": 2773,
 				"line_ending": "Unix"
 			}
 		}
@@ -236,8 +212,6 @@
 	},
 	"file_history":
 	[
-		"/home/gkaiser/Projects/Services/data/supervisor.conf.template",
-		"/home/gkaiser/Projects/Services/data/supervisor.conf",
 		"/home/gkaiser/Projects/Services/database/src/execute_sql_files.py",
 		"/home/gkaiser/Projects/Services/database/seed_data/sensors_testbed.sql",
 		"/home/gkaiser/Projects/Services/data/transformation_rules.json",
@@ -422,56 +396,28 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/home/gkaiser/Projects/Services/data/supervisord.conf.template",
+					"file": "/home/gkaiser/Projects/Supervisor/data/supervisor.conf.template",
 					"settings":
 					{
-						"buffer_size": 10515,
+						"buffer_size": 1815,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3012,
-								3012
+								1671,
+								1671
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 838.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/home/gkaiser/Projects/Services/scripts/startSupervisord",
-					"settings":
-					{
-						"buffer_size": 324,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								70,
-								70
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -480,47 +426,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/home/gkaiser/Projects/Services/data/supervisor.conf.template",
+					"buffer": 1,
+					"file": "/home/gkaiser/Projects/Supervisor/src/supervisorPreProcess.py",
 					"settings":
 					{
-						"buffer_size": 12310,
+						"buffer_size": 2773,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6423,
-								6423
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1938.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
-					"settings":
-					{
-						"buffer_size": 3465,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								433,
-								433
+								993,
+								993
 							]
 						],
 						"settings":
@@ -530,37 +448,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
-			]
-		},
-		{
-			"sheets":
-			[
-				{
-					"buffer": 4,
-					"file": "/home/gkaiser/Projects/Services/scripts/startGarageService",
-					"settings":
-					{
-						"buffer_size": 705,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								459,
-								459
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 102.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -585,12 +472,6 @@
 				0,
 				1,
 				1
-			],
-			[
-				0,
-				1,
-				1,
-				2
 			]
 		],
 		"cols":
@@ -601,7 +482,6 @@
 		"rows":
 		[
 			0.0,
-			0.5,
 			1.0
 		]
 	},

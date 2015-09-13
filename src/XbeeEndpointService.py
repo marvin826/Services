@@ -2,14 +2,14 @@ from xbeeframework import XBeeReader as xbr
 from xbeeframework import XBeeConnection as xbc
 from xbeeframework import XBeePacketHandler as xbph
 from xbeeframework import XBeeFrameDatabase as xbfdb
-import ServiceBase as sb
+from ServiceBase import ServiceBase
 import traceback
 import thread
 import argparse
 import json
 import Queue
 
-class XbeeEndpointService(sb.ServiceBase):
+class XbeeEndpointService(ServiceBase):
 	"""docstring for XbeeEndpointService"""
 	def __init__(self):
 		super(XbeeEndpointService, self).__init__()
@@ -26,7 +26,7 @@ class XbeeEndpointService(sb.ServiceBase):
 	def init(self):
 		super(XbeeEndpointService, self).init()
 
-		self.logger.debug("XbeeEndpointService.init")
+		self.logger.info("XbeeEndpointService.init")
 
 		# initialize the XBeeFramework components
 		frameDB = xbfdb.XBeeFrameDatabase()
@@ -97,6 +97,10 @@ class XbeeEndpointService(sb.ServiceBase):
 			while not self.m_PacketQueue.empty():
 				packet = self.m_PacketQueue.get()
 				self.client.publish(self.arguments.xbeeTopic, packet)
+				dbgmsg = "XbeeEndpointService.loop : Message published to topic " \
+				         + self.arguments.xbeeTopic + "; Message : " \
+				         + packet
+				self.logger.debug(dbgmsg)
 
 	def onMessage(self, client, userdata, msg):
 

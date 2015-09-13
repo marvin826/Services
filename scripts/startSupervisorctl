@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # source the python virtual environment
-source ../supervisor_py/bin/activate
+source ../testbed/bin/activate
 
 
 # start supervisorctl

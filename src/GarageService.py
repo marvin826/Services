@@ -1,10 +1,10 @@
-import ServiceBase as sb
+from ServiceBase import ServiceBase
 import argparse
 import logging
 import json
 import time
 
-class GarageService(sb.ServiceBase):
+class GarageService(ServiceBase):
 	"""docstring for GarageService"""
 	def __init__(self):
 		super(GarageService, self).__init__()
@@ -16,20 +16,18 @@ class GarageService(sb.ServiceBase):
 	def init(self):
 		super(GarageService, self).init()
 
-		self.logger.debug("GarageService.init")
+		self.logger.info("GarageService.init")
 
 		# grab my arguments
 		self.garageLogFile = self.arguments.garageLogFile
 		self.outTopic = self.arguments.outTopic
 
-		# setup the temperature log		
+		# setup the garage readings log		
 		garageLog = logging.getLogger("garage_readings")
 		t_log_file = logging.FileHandler(self.garageLogFile)
 		garageLog.addHandler(t_log_file)
 		garageLog.setLevel(logging.INFO)
 		self.garageLog = garageLog
-
-		pass
 
 	def onMessage(self, client, userdata, msg):
 		super(GarageService, self).onMessage(client, userdata, msg)

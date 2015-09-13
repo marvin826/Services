@@ -1,10 +1,10 @@
-import ServiceBase as sb
+from ServiceBase import ServiceBase
 import json
 import Queue
 import twitter
 import argparse
 
-class TwitterService(sb.ServiceBase):
+class TwitterService(ServiceBase):
 	"""docstring for TwitterService"""
 	def __init__(self):
 		super(TwitterService, self).__init__()

@@ -1,10 +1,10 @@
-import ServiceBase as sb 
+from ServiceBase import ServiceBase 
 import argparse
 import json
 import string
 import re
 
-class TransformationService(sb.ServiceBase):
+class TransformationService(ServiceBase):
 	"""docstring for TransformationService"""
 	def __init__(self):
 		super(TransformationService, self).__init__()

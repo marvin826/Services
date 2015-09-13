@@ -1,21 +1,28 @@
 import paho.mqtt.client as mqttc
 import argparse
 import logging
+import sys
 
 class ServiceBase(object):
 	"""docstring for ServiceBase"""
 	def __init__(self):
-		super(ServiceBase, self).__init__()
+		#super(ServiceBase, self).__init__()
 
 		self.client = None
 		self.topic = None
 		self.arguments = None
 		self.argumentParser = None
 		self.argDescription = "ServiceBase"
+		self.loggingLevels = { "CRITICAL": 50,
+						       "ERROR" : 40,
+						       "WARNING" : 30,
+						       "INFO" : 20, 
+						       "DEBUG" : 10 }
 
 
 	def init(self):
 
+		print "ServiceBase.init()"
 		# setup argument parser
 		# initialize the parser, add arguments to the parser,
 		# then parse the arguments
@@ -48,6 +55,7 @@ class ServiceBase(object):
 
 	def onMessage(self, client, userdata, msg):
 
+		print "ServiceBase.onMessage"
 		if self.logger is not None:
 			self.logger.debug("ServiceBase.onMessage")
 			self.logger.debug(msg.topic + " " + str(msg.payload))
@@ -118,6 +126,19 @@ class ServiceBase(object):
 		m_streamHandler = logging.StreamHandler()
 		message_log.addHandler(m_log_file)
 		message_log.addHandler(m_streamHandler)
-		message_log.setLevel(self.arguments.loggingLevel.upper())
+
+		# set the logging level
+		lvlStr = self.arguments.loggingLevel.upper()
+		if lvlStr in self.loggingLevels:
+			message_log.setLevel(self.loggingLevels[lvlStr])
+			print "ServiceBase.createMessageLog : Level set to : " \
+			      + lvlStr
+			sys.stdout.flush()
+			sys.stderr.flush()
+		else:
+			print "ServiceBase.createMessageLog : Error : " \
+			      + "Log level given: " + lvlStr + " is not a valid level!"
+			sys.stdout.flush()
+			sys.stderr.flush()
 
 		return message_log

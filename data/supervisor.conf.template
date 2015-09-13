@@ -67,6 +67,7 @@ stdout_logfile = ${LOGDIR}/mosquitto_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 [program:xbee_endpoint_service]
 command=python ${ROOTDIR}/src/XbeeEndpointServiceTester.py \
                    --logFile ${LOGDIR}/xbee_endpoint_log_${DTSTAMP="%Y%m%d%H%M"}.log  \
+                   --loggingLevel "INFO" \
                    --frameDBFile ${DATADIR}/XBee_API_Frame_Database.json \
                    --xbeeTopic "services.xbee.packet" \
                    --messageQueueTopic "services.xbee.endpoint" \
@@ -97,7 +98,7 @@ command = python ${ROOTDIR}/src/WeatherServiceTester.py \
                   --logFile ${LOGDIR}/weather_log_${DTSTAMP="%Y%m%d%H%M"}.log \
                   --loggingLevel "INFO" \
                   --temperatureLogFile ${LOGDIR}/temperatures_${DTSTAMP="%Y%m%d%H%M"}.csv \
-                  --messageQueueTopic "services.xbee.readings" \
+                  --messageQueueTopic "services.xbee.packet" \
                   --messageQueueAddress "127.0.0.1" \
                   --messageQueuePort 5250 \
                   --outTopic "services.xbee.readings"

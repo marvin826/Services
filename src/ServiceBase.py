@@ -64,9 +64,9 @@ class ServiceBase(object):
 
 		if self.logger is not None:
 			self.logger.debug("ServiceBase.connect")
-			self.logger.debug("Connect : " + str(self.arguments.messageQueueTopic) + " " + \
-				              str(self.arguments.messageQueueAddress) + " " + \
-				              str(self.arguments.messageQueuePort))
+			self.logger.debug("Connect : " + str(self.arguments.inputQueueTopic) + " " + \
+				              str(self.arguments.queueAddress) + " " + \
+				              str(self.arguments.queuePort))
 
 		if self.client is None:
 			if self.logger is not None:
@@ -74,11 +74,11 @@ class ServiceBase(object):
 			return
 			
 		self.client.will_set("services.event.dropped", "Sorry, I seem to have died.")
-		self.topic = self.arguments.messageQueueTopic
+		self.topic = self.arguments.inputQueueTopic
 
 		try :
-			self.client.connect(self.arguments.messageQueueAddress, 
-				                self.arguments.messageQueuePort, timeout)
+			self.client.connect(self.arguments.queueAddress, 
+				                self.arguments.queuePort, timeout)
 		except Exception, e:
 			if self.logger is not None:
 				self.logger.critical("ServiceBase.connect : Error : " + str(e))
@@ -103,13 +103,16 @@ class ServiceBase(object):
 		self.argumentParser.add_argument('--loggingLevel', 
 										 required=False, default="INFO",
 			                             help="Level of logging to capture (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
-		self.argumentParser.add_argument('--messageQueueTopic', 
+		self.argumentParser.add_argument('--inputQueueTopic', 
 										 required=True,
 			                             help="Topic service listens on for incoming messages")
-		self.argumentParser.add_argument('--messageQueueAddress', 
+		self.argumentParser.add_argument('--outputQueueTopic', 
+										 required=False,
+			                             help="Topic service listens on for incoming messages")
+		self.argumentParser.add_argument('--queueAddress', 
 										 required=False, default="127.0.0.1",
 			                             help="Address of message broker used for messaging")
-		self.argumentParser.add_argument('--messageQueuePort', 
+		self.argumentParser.add_argument('--queuePort', 
 										 required=False, default="5250",
 			                             help="Port of message broker used for messaging")
 

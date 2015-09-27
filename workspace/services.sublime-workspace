@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"pack",
+				"packetAddressFilter"
+			],
+			[
+				"pac",
+				"packetAddressFilter"
+			],
+			[
+				"lo",
+				"loggingLevel"
+			],
+			[
 				"brok",
 				"brokerPort"
 			],
@@ -160,18 +172,10 @@
 	"buffers":
 	[
 		{
-			"file": "/home/gkaiser/Projects/Services/data/supervisord.conf.template",
+			"file": "/home/gkaiser/Projects/Services/src/ServiceBase.py",
 			"settings":
 			{
-				"buffer_size": 10515,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Services/scripts/startSupervisord",
-			"settings":
-			{
-				"buffer_size": 324,
+				"buffer_size": 4553,
 				"line_ending": "Unix"
 			}
 		},
@@ -179,7 +183,15 @@
 			"file": "/home/gkaiser/Projects/Services/data/supervisor.conf.template",
 			"settings":
 			{
-				"buffer_size": 12310,
+				"buffer_size": 12397,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/gkaiser/Projects/Services/src/WeatherService.py",
+			"settings":
+			{
+				"buffer_size": 2398,
 				"line_ending": "Unix"
 			}
 		},
@@ -187,15 +199,15 @@
 			"file": "/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
 			"settings":
 			{
-				"buffer_size": 3465,
+				"buffer_size": 3655,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/scripts/startGarageService",
+			"file": "/home/gkaiser/Projects/Services/src/TwitterService.py",
 			"settings":
 			{
-				"buffer_size": 705,
+				"buffer_size": 4009,
 				"line_ending": "Unix"
 			}
 		}
@@ -236,16 +248,24 @@
 	},
 	"file_history":
 	[
-		"/home/gkaiser/Projects/Services/data/supervisor.conf.template",
+		"/home/gkaiser/Projects/Services/src/SensorService.py",
+		"/home/gkaiser/Projects/Services/src/GarageService.py",
 		"/home/gkaiser/Projects/Services/data/supervisor.conf",
+		"/home/gkaiser/Projects/Python/test/inherit.py",
+		"/home/gkaiser/Projects/Services/data/supervisor.conf.template",
+		"/home/gkaiser/Projects/Services/scripts/startSupervisord",
+		"/home/gkaiser/Projects/Services/data/supervisord.conf.template",
+		"/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
+		"/home/gkaiser/Projects/Services/src/ServiceBase.py",
+		"/home/gkaiser/Projects/Services/src/WeatherService.py",
+		"/home/gkaiser/Projects/Services/src/TransformationService.py",
+		"/home/gkaiser/Projects/Services/src/TwitterService.py",
+		"/home/gkaiser/Projects/Services/scripts/startGarageService",
 		"/home/gkaiser/Projects/Services/database/src/execute_sql_files.py",
 		"/home/gkaiser/Projects/Services/database/seed_data/sensors_testbed.sql",
 		"/home/gkaiser/Projects/Services/data/transformation_rules.json",
 		"/home/gkaiser/Projects/Services/test/src/TemperaturePumper.py",
 		"/home/gkaiser/Projects/Services/test/src/WatchTopic.py",
-		"/home/gkaiser/Projects/Services/src/TransformationService.py",
-		"/home/gkaiser/Projects/Services/src/TwitterService.py",
-		"/home/gkaiser/Projects/Services/src/ServiceBase.py",
 		"/home/gkaiser/Projects/Services/database/tables/voltage_readings.sql",
 		"/home/gkaiser/Projects/Services/database/tables/door_readings.sql",
 		"/home/gkaiser/Projects/Services/database/tables/light_readings.sql",
@@ -253,9 +273,7 @@
 		"/home/gkaiser/Projects/Services/database/tables/sensors.sql",
 		"/home/gkaiser/Projects/Services/database/tables/door_readings",
 		"/home/gkaiser/Projects/Services/database/tables/light_readings",
-		"/home/gkaiser/Projects/Services/scripts/startGarageService",
 		"/home/gkaiser/Projects/Services/scripts/startWeatherService",
-		"/home/gkaiser/Projects/Services/src/GarageService.py",
 		"/home/gkaiser/Projects/Services/scripts/startTwitterService",
 		"/home/gkaiser/Projects/Services/scripts/startTransformationService",
 		"/home/gkaiser/Projects/Services/data/supervisord.conf",
@@ -268,8 +286,6 @@
 		"/home/gkaiser/Projects/Services/src/XbeeEndpointServiceTester.py",
 		"/home/gkaiser/Projects/Services/src/WeatherServiceTester.py",
 		"/home/gkaiser/Projects/Services/src/TransformationServiceTester.py",
-		"/home/gkaiser/Projects/Services/src/WeatherService.py",
-		"/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
 		"/home/gkaiser/Projects/Services/src/TwitterServiceTester.py",
 		"/home/gkaiser/Projects/Services/src/XbeeEndpointService.pyc",
 		"/home/gkaiser/Projects/Services/data/twitter_rules.json",
@@ -347,6 +363,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"client",
+			"temperature",
+			"messageQ",
+			"inputQueue",
+			"messageQueue",
+			"DEBUG",
+			"INFO",
 			"garage",
 			"weather",
 			"mosquitto",
@@ -422,77 +445,49 @@
 	"groups":
 	[
 		{
-			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/home/gkaiser/Projects/Services/data/supervisord.conf.template",
+					"file": "/home/gkaiser/Projects/Services/src/ServiceBase.py",
 					"settings":
 					{
-						"buffer_size": 10515,
+						"buffer_size": 4553,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3012,
-								3012
+								1638,
+								1638
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 838.0,
+						"translation.y": 1020.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/home/gkaiser/Projects/Services/scripts/startSupervisord",
-					"settings":
-					{
-						"buffer_size": 324,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								70,
-								70
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "/home/gkaiser/Projects/Services/data/supervisor.conf.template",
 					"settings":
 					{
-						"buffer_size": 12310,
+						"buffer_size": 12397,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6423,
-								6423
+								5936,
+								5936
 							]
 						],
 						"settings":
@@ -502,7 +497,34 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1938.0,
+						"translation.y": 1643.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/gkaiser/Projects/Services/src/WeatherService.py",
+					"settings":
+					{
+						"buffer_size": 2398,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2398,
+								2398
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 920.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -512,15 +534,15 @@
 					"file": "/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
 					"settings":
 					{
-						"buffer_size": 3465,
+						"buffer_size": 3655,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								433,
-								433
+								304,
+								304
 							]
 						],
 						"settings":
@@ -529,38 +551,34 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1785.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"sheets":
-			[
+				},
 				{
 					"buffer": 4,
-					"file": "/home/gkaiser/Projects/Services/scripts/startGarageService",
+					"file": "/home/gkaiser/Projects/Services/src/TwitterService.py",
 					"settings":
 					{
-						"buffer_size": 705,
+						"buffer_size": 4009,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								459,
-								459
+								2948,
+								2948
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 102.0,
+						"translation.y": 1326.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -585,12 +603,6 @@
 				0,
 				1,
 				1
-			],
-			[
-				0,
-				1,
-				1,
-				2
 			]
 		],
 		"cols":
@@ -601,11 +613,14 @@
 		"rows":
 		[
 			0.0,
-			0.5,
 			1.0
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
 	"replace":
 	{
 		"height": 64.0

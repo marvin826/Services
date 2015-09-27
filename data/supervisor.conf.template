@@ -70,9 +70,9 @@ command=python ${ROOTDIR}/src/XbeeEndpointServiceTester.py \
                    --loggingLevel "INFO" \
                    --frameDBFile ${DATADIR}/XBee_API_Frame_Database.json \
                    --xbeeTopic "services.xbee.packet" \
-                   --messageQueueTopic "services.xbee.endpoint" \
-                   --messageQueueAddress "127.0.0.1" \
-                   --messageQueuePort 5250 \
+                   --inputQueueTopic "services.xbee.endpoint" \
+                   --queueAddress "127.0.0.1" \
+                   --queuePort 5250 \
                    --commPort /dev/ttyS0
 stderr_logfile = ${LOGDIR}/xbee_endpoint_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
 stdout_logfile = ${LOGDIR}/xbee_endpoint_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
@@ -84,12 +84,11 @@ command = python ${ROOTDIR}/src/TransformationServiceTester.py \
                     --logFile ${LOGDIR}/transform_log_${DTSTAMP="%Y%m%d%H%M"}.log \
                     --loggingLevel "INFO" \
                     --rulesFile ${DATADIR}/transformation_rules.json \
-                    --messageQueueTopic "services.xbee.readings" \
-                    --messageQueueAddress "127.0.0.1" \
-                    --messageQueuePort 5250
+                    --inputQueueTopic "services.xbee.readings" \
+                    --queueAddress "127.0.0.1" \
+                    --queuePort 5250
 stderr_logfile = ${LOGDIR}/transform_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
 stdout_logfile = ${LOGDIR}/transform_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
-
 
 
 ; Weather Service
@@ -97,11 +96,12 @@ stdout_logfile = ${LOGDIR}/transform_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 command = python ${ROOTDIR}/src/WeatherServiceTester.py \
                   --logFile ${LOGDIR}/weather_log_${DTSTAMP="%Y%m%d%H%M"}.log \
                   --loggingLevel "INFO" \
-                  --temperatureLogFile ${LOGDIR}/temperatures_${DTSTAMP="%Y%m%d%H%M"}.csv \
-                  --messageQueueTopic "services.xbee.packet" \
-                  --messageQueueAddress "127.0.0.1" \
-                  --messageQueuePort 5250 \
-                  --outTopic "services.xbee.readings"
+                  --readingsLogFile ${LOGDIR}/temperatures_${DTSTAMP="%Y%m%d%H%M"}.csv \
+                  --inputQueueTopic "services.xbee.packet" \
+                  --queueAddress "127.0.0.1" \
+                  --queuePort 5250 \
+                  --outputQueueTopic "services.xbee.readings" \
+                  --packetAddrs "0013 a200 408b 4307"
 stderr_logfile = ${LOGDIR}/weather_service_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
 stdout_logfile = ${LOGDIR}/weather_service_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 
@@ -110,11 +110,12 @@ stdout_logfile = ${LOGDIR}/weather_service_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 command=python ${ROOTDIR}/src/GarageServiceTester.py \
                   --logFile ${LOGDIR}/garage_log_${DTSTAMP="%Y%m%d%H%M"}.log \
                   --loggingLevel "INFO" \
-                  --garageLogFile ${LOGDIR}/garage_${DTSTAMP="%Y%m%d%H%M"}.csv \
-                  --messageQueueTopic "services.xbee.packet" \
-                  --messageQueueAddress "127.0.0.1" \
-                  --messageQueuePort 5250 \
-                  --outTopic "services.xbee.readings"
+                  --readingsLogFile ${LOGDIR}/garage_${DTSTAMP="%Y%m%d%H%M"}.csv \
+                  --inputQueueTopic "services.xbee.packet" \
+                  --queueAddress "127.0.0.1" \
+                  --queuePort 5250 \
+                  --outputQueueTopic "services.xbee.readings" \
+                  --packetAddrs "0013 a200 408b XXXX"
 stderr_logfile = ${LOGDIR}/garage_service_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
 stdout_logfile = ${LOGDIR}/garage_service_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 
@@ -123,9 +124,9 @@ stdout_logfile = ${LOGDIR}/garage_service_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 command=python ${ROOTDIR}/src/TwitterServiceTester.py \
                   --logFile ${LOGDIR}/twitter_log_${DTSTAMP="%Y%m%d%H%M"}.log \
                   --loggingLevel "INFO" \
-                  --messageQueueTopic "services.twitter" \
-                  --messageQueueAddress "127.0.0.1" \
-                  --messageQueuePort 5250
+                  --inputQueueTopic "services.twitter" \
+                  --queueAddress "127.0.0.1" \
+                  --queuePort 5250
                   --keyFile ${DATADIR}/twitter_keys.json
 stderr_logfile = ${LOGDIR}/twitter_service_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
 stdout_logfile = ${LOGDIR}/twitter_service_stdout_${DTSTAMP="%Y%m%d%H%M"}.out

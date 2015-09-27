@@ -1,44 +1,28 @@
-from ServiceBase import ServiceBase
+from SensorService import SensorService
 import argparse
 import logging
 import json
 import time
 
-class GarageService(ServiceBase):
+class GarageService(SensorService):
 	"""docstring for GarageService"""
 	def __init__(self):
 		super(GarageService, self).__init__()
-		
-		self.garageLog = None
-		self.garageLogFile = None
-		self.outTopic = None
 
 	def init(self):
 		super(GarageService, self).init()
 
 		self.logger.info("GarageService.init")
 
-		# grab my arguments
-		self.garageLogFile = self.arguments.garageLogFile
-		self.outTopic = self.arguments.outTopic
-
-		# setup the garage readings log		
-		garageLog = logging.getLogger("garage_readings")
-		t_log_file = logging.FileHandler(self.garageLogFile)
-		garageLog.addHandler(t_log_file)
-		garageLog.setLevel(logging.INFO)
-		self.garageLog = garageLog
-
-	def onMessage(self, client, userdata, msg):
-		super(GarageService, self).onMessage(client, userdata, msg)
+	def processMessage(self, msg):
+		super(GarageService, self).processMessage(msg)
 
 		try:
-			self.logger.debug("GarageService.onMessage : " + str(msg.payload))
-			msgObj = json.loads(msg.payload)
+			self.logger.debug("GarageService.processMessage : " + str(msg))
 
 			updateTime = time.localtime()
 
-			packet = msgObj
+			packet = msg
 
 			comps = packet["Components"]
 			packetTimeStamp = packet["TimeStamp"]
@@ -76,7 +60,7 @@ class GarageService(ServiceBase):
 			                                           doorB,
 			                                           supplyVoltage)
 
-			self.garageLog.info(garageLogMessage)
+			self.readingsLog.info(garageLogMessage)
 
 			# now publish this out
 			messageObject = {}
@@ -91,27 +75,8 @@ class GarageService(ServiceBase):
 			readings["door_b"] = { "value" : doorB }
 			messageObject["readings"] = readings
 
-			self.publishMessage(json.dumps(messageObject), self.outTopic)
+			self.publishMessage(json.dumps(messageObject), self.outputQueueTopic)
 
-		except Exception, e:
+		except Exception, e: 
+
 			self.logger.critical("GarageService.onMessage : " + str(e))
-
-	def addArguments(self):
-		super(GarageService, self).addArguments()
-		
-		self.argumentParser.add_argument('--garageLogFile', 
-							             required=True,
-			                             help="Path to file where garage readings are logged")
-		self.argumentParser.add_argument('--outTopic', 
-							             required=True,
-			                             help="MQTT topic used to send out garage messages")
-
-	def publishMessage(self, message, topic):
-
-		logMsg = "GarageService.publishMessage : \n" \
-		         + str(message) + "\n" \
-		         + str(topic) + "\n"
-		self.logger.debug(logMsg)
-
-		self.client.publish(str(topic), str(message))
-

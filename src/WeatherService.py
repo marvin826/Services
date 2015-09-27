@@ -1,46 +1,28 @@
-from ServiceBase import ServiceBase
+from SensorService import SensorService
 import argparse
 import logging
 import json
 import time
 
-class WeatherService(ServiceBase):
+class WeatherService(SensorService):
 	"""docstring for WeatherService"""
 	def __init__(self):
 		super(WeatherService, self).__init__()
-		
-		self.temperatureLog = None
-		self.temperatureLogFile = None
-		self.outTopic = None
 
 	def init(self):
 		super(WeatherService, self).init()
 
 		self.logger.info("WeatherService.init")
 
-		# grab my arguments
-		self.temperatureLogFile = self.arguments.temperatureLogFile
-		self.outTopic = self.arguments.outTopic
-
-		# setup the temperature log		
-		temperatureLog = logging.getLogger("temperatures")
-		t_log_file = logging.FileHandler(self.temperatureLogFile)
-		temperatureLog.addHandler(t_log_file)
-		temperatureLog.setLevel(logging.INFO)
-		self.temperatureLog = temperatureLog
-
-		pass
-
-	def onMessage(self, client, userdata, msg):
-		super(WeatherService, self).onMessage(client, userdata, msg)
+	def processMessage(self, msg):
+		super(WeatherService, self).processMessage(msg)
 
 		try:
-			self.logger.debug("WeatherService.onMessage : " + str(msg.payload))
-			msgObj = json.loads(msg.payload)
+			self.logger.debug("WeatherService.processMessage : " + str(msg))
 
 			updateTime = time.localtime()
 
-			packet = msgObj
+			packet = msg
 
 			comps = packet["Components"]
 			packetTimeStamp = packet["TimeStamp"]
@@ -69,7 +51,7 @@ class WeatherService(ServiceBase):
 			                                       tempReading,
 			                                       supplyVoltage)
 			self.logger.debug("Logging message: " + tempLogMessage)
-			self.temperatureLog.info(tempLogMessage)
+			self.readingsLog.info(tempLogMessage)
 
 			# now publish this out
 			messageObject = {}
@@ -82,27 +64,9 @@ class WeatherService(ServiceBase):
 			readings["temperature"] = { "value" : tempReading, "units" : "degrees F" }
 			messageObject["readings"] = readings
 
-			self.logger.debug("WeatherService.onMessage publish: " + json.dumps(messageObject))
-			self.publishMessage(json.dumps(messageObject), self.outTopic)
+			self.logger.debug("WeatherService.processMessage publish: " + json.dumps(messageObject))
+			self.publishMessage(json.dumps(messageObject), self.arguments.outputQueueTopic)
+
 		except Exception, e:
-			self.logger.critical("WeatherService.onMessage : " + str(e))
-
-	def addArguments(self):
-		super(WeatherService, self).addArguments()
-		
-		self.argumentParser.add_argument('--temperatureLogFile', 
-							             required=True,
-			                             help="Path to file where temperatures are logged")
-		self.argumentParser.add_argument('--outTopic', 
-							             required=True,
-			                             help="MQTT topic used to send out weather messages")
-
-	def publishMessage(self, message, topic):
-
-		logMsg = "WeatherService.publishMessage : \n" \
-		         + str(message) + "\n" \
-		         + str(topic) + "\n"
-		self.logger.debug(logMsg)
-
-		self.client.publish(str(topic), str(message))
-
+			
+			self.logger.critical("WeatherService.processMessage : " + str(e))

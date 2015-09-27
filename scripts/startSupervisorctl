@@ -5,6 +5,6 @@ source ../testbed/bin/activate
 
 
 # start supervisorctl
-echo "Starting supervisord..."
+echo "Starting supervisorctl..."
 supervisorctl -c ../data/supervisor.conf
 

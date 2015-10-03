@@ -70,3 +70,4 @@ class WeatherService(SensorService):
 		except Exception, e:
 			
 			self.logger.critical("WeatherService.processMessage : " + str(e))
+			

@@ -3,13 +3,13 @@ import json
 import Queue
 import twitter
 import argparse
-#import urllib3
+import requests
 
 # disable InsecurePlatformWarning (need to upgrade to python 2.7.9 to fix correctly)
 #
 # see:
 # https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning
-#rllib3.disable_warnings()
+requests.packages.urllib3.disable_warnings()
 
 class TwitterService(ServiceBase):
 	"""docstring for TwitterService"""
@@ -106,20 +106,19 @@ class TwitterService(ServiceBase):
 
 					# see if this is a duplicate status -- if so, dump
 					# the existing message
-					logMsg = ""
-					if te[0]["code"] == 187:
-						self.nextMessage = None
+					errCode = te[0][0]['code']
+					errMsg = te[0][0]['message']
 
-						logMsg = "TwitterService.onMessage : PostUpdate failed : " 
-						logMsg += str(te[0]['message'])
+					logMsg = "TwitterService.onMessage : PostUpdate failed : " 
+					logMsg += str(errMsg)
+
+					if errCode == 187:
+						self.nextMessage = None
 						logMsg += " Tweet dropped."
 					else :
 						# put the message back so we can try to tweet
 						# later
 						self.messageQueue.put(self.nextMessage)
-
-						logMsg = "TwitterService.onMessage : PostUpdate failed : " 
-						logMsg += str(te[0]['message'])
 						logMsg += " Tweet queued."
 
 					self.logger.critical(logMsg)
@@ -136,3 +135,5 @@ class TwitterService(ServiceBase):
 		self.argumentParser.add_argument('--keyFile', 
 							              required=True,
 			                              help="File that contains keys for Twitter accounts")
+
+	

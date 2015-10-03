@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Twi",
+				"TwitterHelper"
+			],
+			[
 				"pack",
 				"packetAddressFilter"
 			],
@@ -78,10 +82,6 @@
 			[
 				"out",
 				"outTopic"
-			],
-			[
-				"Twi",
-				"TwitterService"
 			],
 			[
 				"msg",
@@ -175,39 +175,7 @@
 			"file": "/home/gkaiser/Projects/Services/src/ServiceBase.py",
 			"settings":
 			{
-				"buffer_size": 4553,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Services/data/supervisor.conf.template",
-			"settings":
-			{
-				"buffer_size": 12397,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Services/src/WeatherService.py",
-			"settings":
-			{
-				"buffer_size": 2398,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
-			"settings":
-			{
-				"buffer_size": 3655,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Services/src/TwitterService.py",
-			"settings":
-			{
-				"buffer_size": 4009,
+				"buffer_size": 4566,
 				"line_ending": "Unix"
 			}
 		}
@@ -248,18 +216,20 @@
 	},
 	"file_history":
 	[
+		"/home/gkaiser/Projects/Services/src/ServiceBase.py",
+		"/home/gkaiser/Projects/Services/test/src/TwitterErrorTest.py",
+		"/home/gkaiser/Projects/Services/scripts/startSupervisorctl",
 		"/home/gkaiser/Projects/Services/src/SensorService.py",
+		"/home/gkaiser/Projects/Services/data/supervisor.conf.template",
+		"/home/gkaiser/Projects/Services/src/WeatherService.py",
+		"/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
+		"/home/gkaiser/Projects/Services/src/TwitterService.py",
 		"/home/gkaiser/Projects/Services/src/GarageService.py",
 		"/home/gkaiser/Projects/Services/data/supervisor.conf",
 		"/home/gkaiser/Projects/Python/test/inherit.py",
-		"/home/gkaiser/Projects/Services/data/supervisor.conf.template",
 		"/home/gkaiser/Projects/Services/scripts/startSupervisord",
 		"/home/gkaiser/Projects/Services/data/supervisord.conf.template",
-		"/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
-		"/home/gkaiser/Projects/Services/src/ServiceBase.py",
-		"/home/gkaiser/Projects/Services/src/WeatherService.py",
 		"/home/gkaiser/Projects/Services/src/TransformationService.py",
-		"/home/gkaiser/Projects/Services/src/TwitterService.py",
 		"/home/gkaiser/Projects/Services/scripts/startGarageService",
 		"/home/gkaiser/Projects/Services/database/src/execute_sql_files.py",
 		"/home/gkaiser/Projects/Services/database/seed_data/sensors_testbed.sql",
@@ -363,6 +333,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"TwitterService.onMessage",
+			":",
+			"self.",
+			"TwitterHelper",
+			"):\n",
+			"None",
 			"client",
 			"temperature",
 			"messageQ",
@@ -445,6 +421,7 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -452,15 +429,15 @@
 					"file": "/home/gkaiser/Projects/Services/src/ServiceBase.py",
 					"settings":
 					{
-						"buffer_size": 4553,
+						"buffer_size": 4566,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1638,
-								1638
+								1369,
+								1369
 							]
 						],
 						"settings":
@@ -469,116 +446,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1020.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/home/gkaiser/Projects/Services/data/supervisor.conf.template",
-					"settings":
-					{
-						"buffer_size": 12397,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5936,
-								5936
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1643.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/home/gkaiser/Projects/Services/src/WeatherService.py",
-					"settings":
-					{
-						"buffer_size": 2398,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2398,
-								2398
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 920.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
-					"settings":
-					{
-						"buffer_size": 3655,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								304,
-								304
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1785.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/home/gkaiser/Projects/Services/src/TwitterService.py",
-					"settings":
-					{
-						"buffer_size": 4009,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2948,
-								2948
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1326.0,
+						"translation.y": 510.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

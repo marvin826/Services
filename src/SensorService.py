@@ -22,7 +22,7 @@ class SensorService(ServiceBase):
 		t_log_file = logging.FileHandler(self.arguments.readingsLogFile)
 		readingsLog.addHandler(t_log_file)
 		readingsLog.setLevel(logging.INFO)
-		self.readingsLog = readingscd Log
+		self.readingsLog = readingsLog
 
 		# get the list of addresses to filter on
 		packetFilterArg = self.arguments.packetAddrs

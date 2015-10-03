@@ -55,7 +55,7 @@ class ServiceBase(object):
 
 	def onMessage(self, client, userdata, msg):
 
-		print "ServiceBase.onMessage"
+		self.logger.debug("ServiceBase.onMessage")
 		if self.logger is not None:
 			self.logger.debug("ServiceBase.onMessage")
 			self.logger.debug(msg.topic + " " + str(msg.payload))

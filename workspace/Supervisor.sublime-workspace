@@ -160,18 +160,10 @@
 	"buffers":
 	[
 		{
-			"file": "/home/gkaiser/Projects/Supervisor/data/supervisor.conf.template",
+			"file": "/home/gkaiser/Projects/Services/test/data/TwitterMessages.json",
 			"settings":
 			{
-				"buffer_size": 1815,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/gkaiser/Projects/Supervisor/src/supervisorPreProcess.py",
-			"settings":
-			{
-				"buffer_size": 2773,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		}
@@ -212,6 +204,8 @@
 	},
 	"file_history":
 	[
+		"/home/gkaiser/Projects/Supervisor/data/supervisor.conf.template",
+		"/home/gkaiser/Projects/Supervisor/src/supervisorPreProcess.py",
 		"/home/gkaiser/Projects/Services/database/src/execute_sql_files.py",
 		"/home/gkaiser/Projects/Services/database/seed_data/sensors_testbed.sql",
 		"/home/gkaiser/Projects/Services/data/transformation_rules.json",
@@ -396,55 +390,28 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/home/gkaiser/Projects/Supervisor/data/supervisor.conf.template",
+					"file": "/home/gkaiser/Projects/Services/test/data/TwitterMessages.json",
 					"settings":
 					{
-						"buffer_size": 1815,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1671,
-								1671
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/home/gkaiser/Projects/Supervisor/src/supervisorPreProcess.py",
-					"settings":
-					{
-						"buffer_size": 2773,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								993,
-								993
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -452,6 +419,11 @@
 					},
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -472,6 +444,12 @@
 				0,
 				1,
 				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
 			]
 		],
 		"cols":
@@ -482,6 +460,7 @@
 		"rows":
 		[
 			0.0,
+			0.5,
 			1.0
 		]
 	},

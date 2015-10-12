@@ -127,7 +127,7 @@ command=python ${ROOTDIR}/src/TwitterServiceTester.py \
                   --inputQueueTopic "services.twitter" \
                   --queueAddress "127.0.0.1" \
                   --queuePort 5250
-                  --keyFile ${DATADIR}/twitter_keys.json
+                  --servicesFile ${DATADIR}/twitter_services.json
 stderr_logfile = ${LOGDIR}/twitter_service_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
 stdout_logfile = ${LOGDIR}/twitter_service_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 

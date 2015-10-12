@@ -17,123 +17,205 @@ class TwitterService(ServiceBase):
 		super(TwitterService, self).__init__()
 		self.credentials = None
 		self.api = None
-		self.messageQueue = None
-		self.nextMessage = None
-		self.consumer_key = None
-		self.consumer_secret = None
-		self.access_token = None
-		self.access_token_secret = None
+
+		# declare a dictionary that will be used to keep track
+		# of the data and state associated with each twitter service
+		# provided in the twitter keys file
+		#
+		# credentials and tweet_window are supplied in the services
+		# file.
+		#
+		# we add the following items as state information:
+		#
+		# api - pointer to the Twitter API object for the given service
+		# last_tweet_time - specifies the last time a tweet was made
+		# message_queue - queue of messages that need to be tweeted
+		# next_message - next message to be tweeted out
+		self.twitter_services = None
+
+		# declare a dictionary that will index into the services
+		# specified in the twitter_services dictionary
+		self.service_index = None
 
 	def init(self):
 		super(TwitterService, self).init()
 
-		twitterKeys = None
 		try:
-			keyFileName = self.arguments.keyFile
-			self.logger.info("TwitterService.init : Loading key file : " + keyFileName)
-			keyFile = open(keyFileName)
-			twitterKeys = json.load(keyFile)
-			keyFile.close()
+			servicesFileName = self.arguments.servicesFile
+			self.logger.info("TwitterService.init : Loading services file : " \
+				+ servicesFileName)
+			servicesFile = open(servicesFileName)
+			self.twitter_services = json.load(servicesFile)
+			servicesFile.close()
 		except Exception, e:
-			self.logger.critical("TwitterService.init : Error reading file : " + str(e))
+			self.logger.critical("TwitterService.init : Error reading file : " \
+				+ str(e))
 			return
 
-		if 'kwtester' not in twitterKeys:
-			self.logger.critical("TwitterService.init : kwtester credentials not found")
+		if not self.loadTwitterServices():
+			self.logger.critical("TwitterService.init : Error loading services")
 			return
-		credentials = twitterKeys['kwtester']
 
-		if ('consumer key' not in credentials) :
-			self.logger.critical("TwitterService.init 'consumer key' missing")	
-			return
-		self.consumer_key = credentials['consumer key']
-		
-		if ('consumer secret' not in credentials) :
-			self.logger.critical("TwitterService.init 'consumer secret' missing")	
-			return
-		self.consumer_secret = credentials['consumer secret']
+	def loadTwitterServices(self):
 
-		if ('access token' not in credentials) :
-			self.logger.critical("TwitterService.init 'access token' missing")	
-			return
-		self.access_token = credentials['access token']
+		if 'services' not in self.twitter_services :
+			self.logger.critical("TwitterService.loadTwitterServices : " \
+				+ "'services' not in services file")
+			return False
 
-		if('access token secret' not in credentials) :
-			self.logger.critical("TwitterService.init 'access token secret' missing")
-			return
-		self.access_token_secret = credentials['access token secret']
+		self.service_index = {}
+		services = self.twitter_services['services']
+		for service in services :
 
-		self.credentials = credentials
+			# make sure this service has a name
+			if 'name' not in service:
+				self.logger.critical("TwitterService.loadTwitterServices : " \
+					+ "'name' not in service")
+			else:
+				self.logger.info("TwitterService.loadTwitterServices : " \
+					+ 'Loading service : ' + service['name'])
 
-		self.api = twitter.Api(self.consumer_key,
-							   self.consumer_secret,
-							   self.access_token,
-							   self.access_token_secret)
+			# add this to the service_index for faster access
+			self.service_index[service['name']] = service
 
-		self.messageQueue = Queue.Queue(25)
-		self.logger.info("TwitterService initialized successfully")
+			# verify that the Twitter credentials were provided
+			if 'credentials' not in service:
+				self.logger.critical("TwitterService.loadTwitterServices : " \
+					+ "'credentials' not in service : " \
+					+ service['name'])
+				return False
+			credentials = service['credentials']
+
+			if ('consumer key' not in credentials) :
+				self.logger.critical("TwitterService.loadTwitterServices : " \
+					+ " 'consumer key' not provided for service : " \
+					+ service['name'])	
+				return False
+			
+			if ('consumer secret' not in credentials) :
+				self.logger.critical("TwitterService.loadTwitterServices : " \
+					+ " 'consumer secret' not provided for service : " \
+					+ service['name'])	
+				return False
+
+			if ('access token' not in credentials) :
+				self.logger.critical("TwitterService.loadTwitterServices : " \
+					+ " 'access token' not provided for service : " \
+					+ service['name'])	
+				return False
+
+			if('access token secret' not in credentials) :
+				self.logger.critical("TwitterService.loadTwitterServices : " \
+					+ " 'access token secret' not provided for service : " \
+					+ service['name'])
+				return False
+
+			# create the Twitter API
+			api = twitter.Api( credentials['consumer key'],
+							   credentials['consumer secret'],
+							   credentials['access token'],
+							   credentials['access token secret'] )
+			service['api'] = api
+
+			# add a message queue for this service
+			service['message_queue'] = Queue.Queue(25)
+			service['next_message'] = None
+
+			self.logger.info("TwitterService.loadTwitterServices : " \
+				+ "Service '" + service['name'] + "'" \
+				+ " initialized successfully")
+
+		return True
 
 	def onMessage(self, client, userdata, msg):
 		super(TwitterService, self).onMessage(client, userdata, msg)
-		self.logger.debug("TwitterService.onMessage")
-		self.logger.debug("Payload : " + msg.payload)
+		self.logger.info("TwitterService.onMessage")
+		self.logger.info("Payload : " + msg.payload)
 
-		if (self.messageQueue is not None):
-
+		try :
 			msgObj = json.loads(msg.payload)
+		except Exception, e:
+			self.logger.critical("TwitterService.onMessage : " \
+				+ " Error loading json object : " \
+				+ str(e))
+			return
+		
+		if 'service' not in msgObj:
+			self.logger.critical("TwitterService.onMessage : " \
+				+ "'service' not provided in message : " \
+				+ str(msg))
+			return
+		service_name = msgObj['service']
 
-			service = msgObj['service']
-			payload = msgObj['message']
+		if 'message' not in msgObj : 
+			self.logger.critical("TwitterService.onMessage : " \
+				+ "'message' not provided in message : " \
+				+ str(msg))
+			return
+		payload = msgObj['message']
 
-			self.messageQueue.put(payload)
+		# get the service that corresponds to this message
+		if service_name not in self.service_index :
+			self.logger.critical("TwitterService.onMessage : " \
+				+ "Service '" + service_name + "' not found in service file")
+			return
+		service = self.service_index[service_name]
 
-			while not self.messageQueue.empty():
+		# get the message queue
+		messageQueue = service['message_queue']
+		messageQueue.put(payload)
 
-				try:
-					self.nextMessage = self.messageQueue.get(False)
+		# get the next_message pointer
+		nextMessage = service['next_message']
 
-				except Exception, e:
-					msg = "TwitterService.onMessage : Error with message queue : " + str(e)
-					self.logger.critical(msg)
+		while not messageQueue.empty():
+
+			try:
+				nextMessage = messageQueue.get(False)
+
+			except Exception, e:
+				msg = "TwitterService.onMessage : Error with message queue : " \
+					  + str(e)
+				self.logger.critical(msg)
+				nextMessage = None
+				break
+
+			try:
+				service['api'].PostUpdate(nextMessage)
+				nextMessage = None
+
+			except twitter.error.TwitterError, te:
+
+				# see if this is a duplicate status -- if so, dump
+				# the existing message
+				errCode = te[0][0]['code']
+				errMsg = te[0][0]['message']
+
+				logMsg = "TwitterService.onMessage : PostUpdate failed : " 
+				logMsg += str(errMsg)
+
+				if errCode == 187:
 					self.nextMessage = None
-					break
+					logMsg += " Tweet dropped."
+				else :
+					# put the message back so we can try to tweet
+					# later
+					messageQueue.put(nextMessage)
+					logMsg += " Tweet queued."
 
-				try:
-					self.api.PostUpdate(self.nextMessage)
-					self.nextMessage = None
+				self.logger.critical(logMsg)
 
-				except twitter.error.TwitterError, te:
-
-					# see if this is a duplicate status -- if so, dump
-					# the existing message
-					errCode = te[0][0]['code']
-					errMsg = te[0][0]['message']
-
-					logMsg = "TwitterService.onMessage : PostUpdate failed : " 
-					logMsg += str(errMsg)
-
-					if errCode == 187:
-						self.nextMessage = None
-						logMsg += " Tweet dropped."
-					else :
-						# put the message back so we can try to tweet
-						# later
-						self.messageQueue.put(self.nextMessage)
-						logMsg += " Tweet queued."
-
-					self.logger.critical(logMsg)
-
-				except Exception, e:
-					msg = "TwitterService.onMessage : Error posting to Twitter : " \
-							+ str(e)
-					self.logger.critical(msg)
+			except Exception, e:
+				msg = "TwitterService.onMessage : Error posting to Twitter : " \
+						+ str(e)
+				self.logger.critical(msg)
 
 
 	def addArguments(self):
 		super(TwitterService, self).addArguments()
 
-		self.argumentParser.add_argument('--keyFile', 
+		self.argumentParser.add_argument('--servicesFile', 
 							              required=True,
-			                              help="File that contains keys for Twitter accounts")
+			                              help="File that contains service definitions")
 
 	

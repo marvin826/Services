@@ -4,6 +4,8 @@ import Queue
 import twitter
 import argparse
 import requests
+import datetime
+import sys
 
 # disable InsecurePlatformWarning (need to upgrade to python 2.7.9 to fix correctly)
 #
@@ -121,6 +123,10 @@ class TwitterService(ServiceBase):
 			service['message_queue'] = Queue.Queue(25)
 			service['next_message'] = None
 
+			# initialize last tweet time to the smallest time
+			# possible
+			service['last_tweet_time'] = datetime.datetime.min			
+
 			self.logger.info("TwitterService.loadTwitterServices : " \
 				+ "Service '" + service['name'] + "'" \
 				+ " initialized successfully")
@@ -163,10 +169,20 @@ class TwitterService(ServiceBase):
 
 		# get the message queue
 		messageQueue = service['message_queue']
-		messageQueue.put(payload)
 
-		# get the next_message pointer
-		nextMessage = service['next_message']
+		# grab the current time and compare it to the last tweet
+		# time for this message. If the current time is greater than
+		# the tweet window, then put the message in the queue.
+		# Otherwise, we drop the message
+		currentTime = datetime.datetime.now()
+		diff = currentTime - service['last_tweet_time']
+
+		# tweet_window is in minutes
+		if diff.total_seconds() >= (service['tweet_window'] * 60) :
+			messageQueue.put(payload)
+
+			# set the last tweet time
+			service['last_tweet_time'] = currentTime
 
 		while not messageQueue.empty():
 
@@ -204,11 +220,13 @@ class TwitterService(ServiceBase):
 					logMsg += " Tweet queued."
 
 				self.logger.critical(logMsg)
+				break
 
 			except Exception, e:
 				msg = "TwitterService.onMessage : Error posting to Twitter : " \
 						+ str(e)
 				self.logger.critical(msg)
+				break
 
 
 	def addArguments(self):

@@ -2,6 +2,7 @@ import json
 import threading
 import Queue
 import paho.mqtt.client as mqttc
+import datetime
 
 # 
 # declare a Queue to store the messages
@@ -37,7 +38,7 @@ client.will_set("services.event.dropped", "I've died")
 
 
 try:
-	client.connect("127.0.0.1", 5250, 60)
+	client.connect("127.0.0.1", 5250, 600)
 except Exception, e:
 	print "Error: " + str(e)
 
@@ -53,13 +54,17 @@ def publishMessage():
 	client.publish("services.twitter", str(msg))
 
 	if not q.empty() :
-		t = threading.Timer(60.0, publishMessage)
+		t = threading.Timer(300.0, publishMessage)
 		t.start()
 	else:
 		print "message queue empty..."
 
-t = threading.Timer(60.0, publishMessage)
-t.start()
+#publishMessage()
 
-print "Timer started"
+#print "Timer started"
 
+while True:
+
+	message = raw_input("Message : ")
+	print "Received message : " + message
+	client.publish("services.twitter", message)

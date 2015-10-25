@@ -129,8 +129,8 @@ class TwitterService(ServiceBase):
 
 	def onMessage(self, client, userdata, msg):
 		super(TwitterService, self).onMessage(client, userdata, msg)
-		self.logger.info("TwitterService.onMessage")
-		self.logger.info("Payload : " + msg.payload)
+		self.logger.debug("TwitterService.onMessage")
+		self.logger.debug("Payload : " + msg.payload)
 
 		try :
 			msgObj = json.loads(msg.payload)

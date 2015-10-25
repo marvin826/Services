@@ -99,6 +99,12 @@ class TransformationService(ServiceBase):
 				match = selector.search(obj)
 				if match is not None:
 					obj = match.group(0)
+				else:
+					logMsg = "TransformationService.processVariables : Error : \n" \
+						+ "Could not find match for selector : '" \
+						+ value["selector"] + "'"
+					self.logger.critical(logMsg)
+					break
 
 			if "format" in value:
 				formatStr = value["format"]

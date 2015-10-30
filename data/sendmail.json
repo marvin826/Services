@@ -9,5 +9,15 @@
 			"from_addr" : "kwsmon@gmail.com",
 			"sender" : "KaiserW Service Monitor"
 		}
+	],
+	"templates" : [
+		{
+			"name" : "supply_voltage",
+			"subject" : "KWS Supply Voltage",
+			"variables" :
+				{
+					"${A}"
+				}
+		}
 	]
 }

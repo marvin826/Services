@@ -1,0 +1,9 @@
+{
+	"message" : "supply_voltage",
+	"address" : "A000 B000 1111 2222",
+	"time_stamp" : "2015-06-10T12:30:45",
+	"supply_voltage" : {
+		"value" : 2.34,
+		"units" : "volts"
+	}
+}

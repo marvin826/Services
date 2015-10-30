@@ -1,0 +1,10 @@
+
+Hello!
+
+The supply voltage for sensor ${ADDRESS} is low. The current supply
+voltage is:
+
+${VOLTS} volts
+
+Consider changing the batteries for this sensor.
+

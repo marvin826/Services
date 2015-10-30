@@ -14,10 +14,13 @@
 		{
 			"name" : "supply_voltage",
 			"subject" : "KWS Supply Voltage",
+			"account" : "kwsmon",
 			"variables" :
 				{
-					"${A}"
-				}
+					"${VOLTS}" : { "path" : "supply_voltage.value", "format" : "0:03.2f" },
+					"${TIME}" : { "path" : "time_stamp", "selector" : "[012][0-9]:[0-5][0-9]:[0-5][0-9]" }
+				},
+			"email_template" : "supply_voltage_low.template"
 		}
 	]
 }

@@ -3,41 +3,56 @@ import smtplib
 import email.utils
 from email.mime.text import MIMEText
 import json
+import os
 
 class SendMailService(ServiceBase):
 	"""docstring for SendMailService"""
 	def __init__(self):
 		super(SendMailService, self).__init__()
 
-		self.config = None
+		self.mailConfig = None
 		self.accounts = None
-		self.templates
+		self.templates = None
+		self.templateDir = None
 
 	def init(self):
+		super(SendMailService, self).init()
 		
 		try:
 			self.logger.info("SendMailService.init : Loading config file : " \
 				      + self.arguments.configFile)
 			cfile = open(self.arguments.configFile)
-			self.config = json.load(cfile)
+			self.mailConfig = json.load(cfile)
 			cfile.close()
-			self.loadConfiguration()
 
 		except Exception, e:
 			self.logger.critical("SendMailService.init : Error reading file : " \
-				self.arguments.configFile) + " : " + str(e)
-			return			
+				+ self.arguments.configFile + " : " + str(e))
+			return	
+
+		# get the template directory from my arguments and
+		# make sure that directory exists
+		self.templateDir = self.arguments.templateDir
+		if not os.path.isdir(self.templateDir) :
+			self.logger.critical("SendMailService.init : Error : " \
+				+ "Given template directory \'" + self.templateDir \
+				+ "\' does not exist")
+			return
+		
+		self.loadConfiguration()		
 
 	def loadConfiguration(self):
 
+		self.logger.info("SendMailService.loadConfiguration")
+
 		# make sure the right items where loaded from the file
-		if "accounts" not in self.config :
+		if "accounts" not in self.mailConfig :
 			self.logger.critical("SendMailService.loadConfiguration : " \
 				+ "Error : \"accounts\" objects not in config file : \n" \
 				+ self.arguments.configFile)
 			return
 
-		if "templates" not in self.config : 
+		if "templates" not in self.mailConfig : 
 			self.logger.critical("SendMailService.loadConfiguration : " \
 				+ "Error : \"templates\" objects not in config file : \n" \
 				+ self.arguments.configFile)
@@ -46,20 +61,26 @@ class SendMailService(ServiceBase):
 		# load the accounts listed in the config file.
 		# we reference the accounts by the account name provided
 		# in the json object
-		for account in self.config["accounts"] :
-			self.accounts[account["name"]] = account
+		self.accounts = {}
+		for account in self.mailConfig["accounts"] :
+			if "name" in account:
+				self.accounts[account["name"]] = account
+			else:
+				self.logger.critical("SendMailService.loadConfiguration : " \
+					+ "Error : \"name\" not in account")
+				return
 
 		# load the tempates liste in the config file.
 		# we reference the templates by the template name
 		# provided in the json object
-		for template in self.config["templates"] :
+		for template in self.mailConfig["templates"] :
 			self.accounts[template["name"]] = template
 
 			# get the file name of the template to use and load it
 			# in. We store the contents of the template as a string
-			if "email_template" in template:
+			if "template" in template:
 				try:
-					template_file = open(template["email_template"])
+					template_file = open(self.templateDir + "/" + template["template"])
 					template["template_string"] = template_file.read()
 
 				except Exception, e:
@@ -69,7 +90,7 @@ class SendMailService(ServiceBase):
 
 			else:
 				self.logger.critical("SendMailService.loadConfiguration : " \
-					+ "Error : \"email_template\" not in template : " \
+					+ "Error : \"template\" not in template : " \
 					+ template["name"])
 				return
 
@@ -116,7 +137,13 @@ class SendMailService(ServiceBase):
 				+ "Error : could not find \"message\" attribute in received message.")
 			return
 
+	def generateMessage(self, template, variables):
+		self.logger.info("SendMailService.generateMessage")
+		pass
+
 	def sendMail(self, account, body):
+		self.logger.info("SendMailService.sendMail")
+		pass
 		
 	def addArguments(self):
 		super(SendMailService, self).addArguments()
@@ -124,6 +151,10 @@ class SendMailService(ServiceBase):
 		self.argumentParser.add_argument('--configFile',
 									     required=True,
 									     help="File that contains mail services definitions")
+
+		self.argumentParser.add_argument('--templateDir',
+									     required=True,
+									     help="Directory of template files")
 
 
 		

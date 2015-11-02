@@ -39,6 +39,8 @@ class TwitterService(ServiceBase):
 		# specified in the twitter_services dictionary
 		self.service_index = None
 
+		self.argDescription = "TwitterService"
+
 	def init(self):
 		super(TwitterService, self).init()
 

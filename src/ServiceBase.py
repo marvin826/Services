@@ -6,13 +6,12 @@ import sys
 class ServiceBase(object):
 	"""docstring for ServiceBase"""
 	def __init__(self):
-		#super(ServiceBase, self).__init__()
 
 		self.client = None
 		self.topic = None
 		self.arguments = None
 		self.argumentParser = None
-		self.argDescription = "ServiceBase"
+		self.argDescription = self.__class__.__name__
 		self.loggingLevels = { "CRITICAL": 50,
 						       "ERROR" : 40,
 						       "WARNING" : 30,
@@ -100,21 +99,21 @@ class ServiceBase(object):
 		self.argumentParser.add_argument('--logFile', 
 										 required=True,
 			                             help="Path to file where log messages are directed")
-		self.argumentParser.add_argument('--loggingLevel', 
-										 required=False, default="INFO",
-			                             help="Level of logging to capture (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
 		self.argumentParser.add_argument('--inputQueueTopic', 
 										 required=True,
 			                             help="Topic service listens on for incoming messages")
+		self.argumentParser.add_argument('--queueAddress', 
+										 required=True, default="127.0.0.1",
+			                             help="Address of message broker used for messaging")
+		self.argumentParser.add_argument('--queuePort', 
+										 required=True, default="5250",
+			                             help="Port of message broker used for messaging")
+		self.argumentParser.add_argument('--loggingLevel', 
+										 required=False, default="INFO",
+			                             help="Level of logging to capture (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
 		self.argumentParser.add_argument('--outputQueueTopic', 
 										 required=False,
 			                             help="Topic service listens on for incoming messages")
-		self.argumentParser.add_argument('--queueAddress', 
-										 required=False, default="127.0.0.1",
-			                             help="Address of message broker used for messaging")
-		self.argumentParser.add_argument('--queuePort', 
-										 required=False, default="5250",
-			                             help="Port of message broker used for messaging")
 
 	def parseArguments(self):
 

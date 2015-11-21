@@ -4,7 +4,7 @@
 source ../testbed/bin/activate
 
 # run the supervisord preprocessor
-python ../src/supervisorPreProcess.py --input ../data/supervisor.conf.template --output ../data/supervisor.conf
+python ../src/supervisorPreProcess.py --input ../data/templates/supervisor.conf.template --output ../data/supervisor.conf
 
 # start supervisord
 echo "Starting supervisord..."

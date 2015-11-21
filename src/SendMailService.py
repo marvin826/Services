@@ -70,7 +70,7 @@ class SendMailService(ServiceBase):
 					+ "Error : \"name\" not in account")
 				return
 
-		# load the tempates liste in the config file.
+		# load the tempates list in the config file.
 		# we reference the templates by the template name
 		# provided in the json object
 		for template in self.mailConfig["templates"] :

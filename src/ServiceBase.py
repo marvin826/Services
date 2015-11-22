@@ -113,11 +113,17 @@ class ServiceBase(object):
 			                             help="Level of logging to capture (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
 		self.argumentParser.add_argument('--outputQueueTopic', 
 										 required=False,
-			                             help="Topic service listens on for incoming messages")
+			                             help="Topic service sends messages out on")
 
 	def parseArguments(self):
 
-		self.arguments = self.argumentParser.parse_args()
+		try:
+			self.arguments = self.argumentParser.parse_args()
+		except Exception, e:
+			if self.logger is not None:
+				self.logger.critical("ServiceBase.parseArugments : Error : " + str(e))
+				exit(0)
+
 
 	def createMessageLog(self):
 

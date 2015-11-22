@@ -26,7 +26,7 @@ class SensorService(ServiceBase):
 
 		# get the list of addresses to filter on
 		packetFilterArg = self.arguments.packetAddrs
-		packetAddressFilter = packetFilterArg.split(',')
+		self.packetAddressFilter = packetFilterArg.split(',')
 
 		self.logger.debug("SensorService.init : packet filters : " \
 			                + str(self.packetAddressFilter))
@@ -61,7 +61,7 @@ class SensorService(ServiceBase):
 			# grab the packet address out of the packet and see if this is 
 			# in our filter
 			address = msgObj['Components']['64-bit Source Address']['address']
-
+			
 			if address in self.packetAddressFilter:
 				self.processMessage(msgObj)
 			else:

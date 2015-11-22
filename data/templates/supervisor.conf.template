@@ -126,10 +126,22 @@ command=python ${ROOTDIR}/src/TwitterServiceTester.py \
                   --loggingLevel "INFO" \
                   --inputQueueTopic "services.twitter" \
                   --queueAddress "127.0.0.1" \
-                  --queuePort 5250
+                  --queuePort 5250 \
                   --servicesFile ${DATADIR}/twitter_services.json
 stderr_logfile = ${LOGDIR}/twitter_service_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
 stdout_logfile = ${LOGDIR}/twitter_service_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
+
+; Supply Voltage Service
+[program:supply_voltage_service]
+command=python ${ROOTDIR}/src/SupplyVoltageServiceTester.py \
+                  --logFile ${LOGDIR}/supply_voltage_log_${DTSTAMP="%Y%m%d%H%M"}.log \
+                  --loggingLevel "INFO" \
+                  --inputQueueTopic "services.xbee.readings" \
+                  --queueAddress "127.0.0.1" \
+                  --queuePort 5250 
+stderr_logfile = ${LOGDIR}/supply_voltage_service_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
+stdout_logfile = ${LOGDIR}/supply_voltage_service_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
+
 
 [group:services]
 programs=transformation_service,weather_service,twitter_service,xbee_endpoint_service,garage_service

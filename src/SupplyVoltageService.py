@@ -1,13 +1,18 @@
-import ConsumerBase as cb
+from ServiceBase import ServiceBase
 import json
 
-class SupplyVoltageService(cb.ConsumerBase):
+class SupplyVoltageService(ServiceBase):
 	"""docstring for SupplyVoltageService"""
 	def __init__(self):
 		super(SupplyVoltageService, self).__init__()
 	
+	def init(self):
+		super(SupplyVoltageService, self).init()
+
+		self.logger.info("SupplyVoltageService.init")
+
 	def onMessage(self, client, userdata, msg):
-		print "SupplyVoltageService:onMessage"
+		self.logger.info("SupplyVoltageService:processMessage")
 
 		jsonStr = msg.payload
 		jsonObj = json.loads(jsonStr)
@@ -16,13 +21,13 @@ class SupplyVoltageService(cb.ConsumerBase):
 		supply_voltage = supply_voltage_dict["value"]
 
 		if supply_voltage < 2.5:
-			print "Warning: Supply voltage getting low: " + str(supply_voltage)
+			self.logger.info("Warning: Supply voltage getting low: " + str(supply_voltage))
 			return
 
 		if supply_voltage <= 2.3:
-			print "Critical: Supply voltage exhausted: " + str(supply_voltage)
+			self.logger.info("Critical: Supply voltage exhausted: " + str(supply_voltage))
 			return
 
-		print "Voltage is good: " + str(supply_voltage)
+		self.logger.info("Voltage is good: " + str(supply_voltage))
 
 

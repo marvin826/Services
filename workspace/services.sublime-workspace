@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"Supp",
+				"SupplyVoltageService"
+			],
+			[
+				"mes",
+				"messageFile"
+			],
+			[
+				"mess",
+				"messageQueue"
+			],
+			[
+				"Send",
+				"SendMailService"
+			],
+			[
+				"templ",
+				"templateDir"
+			],
+			[
+				"Sen",
+				"SendMailService"
+			],
+			[
+				"mail",
+				"mailConfig"
+			],
+			[
 				"TwitterMe",
 				"TwitterMessagePumper"
 			],
@@ -124,10 +152,6 @@
 				"pluginFileName"
 			],
 			[
-				"mess",
-				"message_log"
-			],
-			[
 				"handl",
 				"handleSignals"
 			],
@@ -179,7 +203,7 @@
 			"file": "/home/gkaiser/Projects/Services/src/SendMailService.py",
 			"settings":
 			{
-				"buffer_size": 1105,
+				"buffer_size": 6446,
 				"line_ending": "Unix"
 			}
 		},
@@ -187,23 +211,39 @@
 			"file": "/home/gkaiser/Projects/Services/data/sendmail.json",
 			"settings":
 			{
-				"buffer_size": 387,
+				"buffer_size": 616,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/src/TwitterService.py",
+			"file": "/home/gkaiser/Projects/Services/test/src/MessagePumper.py",
 			"settings":
 			{
-				"buffer_size": 7187,
+				"buffer_size": 2343,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/src/SendMail.py",
+			"file": "/home/gkaiser/Projects/Services/test/data/send_mail_msg.json",
 			"settings":
 			{
-				"buffer_size": 897,
+				"buffer_size": 214,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/gkaiser/Projects/Services/src/ServiceBase.py",
+			"settings":
+			{
+				"buffer_size": 4524,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/gkaiser/Projects/Services/src/SupplyVoltageService.py",
+			"settings":
+			{
+				"buffer_size": 830,
 				"line_ending": "Unix"
 			}
 		}
@@ -244,21 +284,24 @@
 	},
 	"file_history":
 	[
-		"/home/gkaiser/Projects/Services/src/SendMail.py",
-		"/home/gkaiser/Projects/Services/data/transformation_rules.json",
-		"/home/gkaiser/Projects/Services/test/src/TwitterMessagePumper.py",
-		"/home/gkaiser/Projects/Services/src/TransformationService.py",
+		"/home/gkaiser/Projects/Services/src/SensorService.py",
+		"/home/gkaiser/Projects/Services/src/GarageService.py",
 		"/home/gkaiser/Projects/Services/src/TwitterService.py",
+		"/home/gkaiser/Projects/Services/src/SendMail.py",
 		"/home/gkaiser/Projects/Services/src/ServiceBase.py",
+		"/home/gkaiser/Projects/Services/test/src/TwitterMessagePumper.py",
+		"/home/gkaiser/Projects/Services/src/SendMailServiceTester.py",
+		"/home/gkaiser/Projects/Services/src/TransformationServiceTester.py",
+		"/home/gkaiser/Projects/Services/data/templates/supply_voltage_low.template",
+		"/home/gkaiser/Projects/Services/data/transformation_rules.json",
+		"/home/gkaiser/Projects/Services/src/TransformationService.py",
 		"/home/gkaiser/Projects/Services/src/WeatherService.py",
 		"/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
 		"/home/gkaiser/Projects/Services/data/supervisor.conf",
 		"/home/gkaiser/Projects/Services/data/twitter_keys.json",
 		"/home/gkaiser/Projects/Services/test/src/TwitterErrorTest.py",
 		"/home/gkaiser/Projects/Services/scripts/startSupervisorctl",
-		"/home/gkaiser/Projects/Services/src/SensorService.py",
 		"/home/gkaiser/Projects/Services/data/supervisor.conf.template",
-		"/home/gkaiser/Projects/Services/src/GarageService.py",
 		"/home/gkaiser/Projects/Python/test/inherit.py",
 		"/home/gkaiser/Projects/Services/scripts/startSupervisord",
 		"/home/gkaiser/Projects/Services/data/supervisord.conf.template",
@@ -285,7 +328,6 @@
 		"/home/gkaiser/Projects/Bootstrap/web/first.html",
 		"/home/gkaiser/Projects/Services/src/XbeeEndpointServiceTester.py",
 		"/home/gkaiser/Projects/Services/src/WeatherServiceTester.py",
-		"/home/gkaiser/Projects/Services/src/TransformationServiceTester.py",
 		"/home/gkaiser/Projects/Services/src/TwitterServiceTester.py",
 		"/home/gkaiser/Projects/Services/src/XbeeEndpointService.pyc",
 		"/home/gkaiser/Projects/Services/data/twitter_rules.json",
@@ -363,6 +405,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"SensorService",
+			"argParser.",
+			"self.config",
+			"config",
+			"self.config",
+			"config",
+			"mailConfig",
+			"supplyVoltage",
+			"SupplyVoltage",
+			"supplyVoltage",
 			"publish",
 			"TwitterService.onMessage",
 			":",
@@ -452,7 +504,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -460,15 +512,15 @@
 					"file": "/home/gkaiser/Projects/Services/src/SendMailService.py",
 					"settings":
 					{
-						"buffer_size": 1105,
+						"buffer_size": 6446,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								721,
-								721
+								4592,
+								4592
 							]
 						],
 						"settings":
@@ -477,7 +529,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2261.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -487,15 +539,15 @@
 					"file": "/home/gkaiser/Projects/Services/data/sendmail.json",
 					"settings":
 					{
-						"buffer_size": 387,
+						"buffer_size": 616,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								372,
-								372
+								566,
+								566
 							]
 						],
 						"settings":
@@ -508,26 +560,21 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"sheets":
-			[
+				},
 				{
 					"buffer": 2,
-					"file": "/home/gkaiser/Projects/Services/src/TwitterService.py",
+					"file": "/home/gkaiser/Projects/Services/test/src/MessagePumper.py",
 					"settings":
 					{
-						"buffer_size": 7187,
+						"buffer_size": 2343,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4432,
-								4432
+								2343,
+								2343
 							]
 						],
 						"settings":
@@ -536,25 +583,85 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2720.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "/home/gkaiser/Projects/Services/src/SendMail.py",
+					"file": "/home/gkaiser/Projects/Services/test/data/send_mail_msg.json",
 					"settings":
 					{
-						"buffer_size": 897,
+						"buffer_size": 214,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								147,
-								147
+								211,
+								211
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/gkaiser/Projects/Services/src/ServiceBase.py",
+					"settings":
+					{
+						"buffer_size": 4524,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3144,
+								3144
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 106.0,
+						"translation.y": 1581.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "/home/gkaiser/Projects/Services/src/SupplyVoltageService.py",
+					"settings":
+					{
+						"buffer_size": 830,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								311,
+								311
 							]
 						],
 						"settings":

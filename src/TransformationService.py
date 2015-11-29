@@ -1,4 +1,5 @@
 from ServiceBase import ServiceBase 
+from VariableProcessor import VariableProcessor
 import argparse
 import json
 import string
@@ -10,6 +11,7 @@ class TransformationService(ServiceBase):
 		super(TransformationService, self).__init__()
 
 		self.rulesObj = None
+		self.varProcessor = None
 
 	def init(self):
 		super(TransformationService, self).init()
@@ -22,7 +24,10 @@ class TransformationService(ServiceBase):
 			rulesFile.close()
 		except Exception, e:
 			self.logger.critical("TransformationService.init : Error : " + str(e))
-			return			
+			return		
+
+		self.varProcessor = VariableProcessor()
+		self.varProcessor.init(self.logger)	
 
 	def onMessage(self, client, userdata, msg):
 		super(TransformationService, self).onMessage(client, userdata, msg)
@@ -38,8 +43,8 @@ class TransformationService(ServiceBase):
 				rules = self.rulesObj[address]	
 				variable = None		
 				for transform in rules:
-					if "variables" in transform:					
-						variables = self.processVariables(address, transform["variables"], msgObj)
+					if "variables" in transform:		
+						variables = self.varProcessor.processVariables(transform["variables"], msgObj)
 					else:
 						print '"variables" not in transform: ' + str(transform)
 						logMsg = "TransformationService.onMessage : No variables found for address : "
@@ -63,63 +68,7 @@ class TransformationService(ServiceBase):
 							             required=True,
 			                             help="Path to file transformation rules are defined")
 		
-	def processVariables(self, address, variables, msg):
-		
-		self.logger.debug("TransformationService.processVariables")
-		self.logger.debug(msg)
-
-		results = {}
-		self.logger.debug("Variables before: ")
-		for key in variables.keys():
-			value = variables[key]
-			self.logger.debug(key + " : " + str(variables[key]))
-
-			path = None
-			if "path" in value:
-				path = value["path"]
-			else:
-				logMsg = "TransformationService.processVariables : Error : \n" \
-				         + "\"path\" not found in variable description."
-				self.logger.critical(logMsg)
-
-			path = string.split(path, '.')
-			obj = msg
-			for token in path:
-				if token in obj:
-					obj = obj[token]
-				else:
-					logMsg = "TransformationService.processVariables : Error : \n" \
-						+ "'" + token + "' token from path '" + value \
-						+ "' not found in message : " + str(msg)
-					self.logger.critical(logMsg)
-					break
-
-			if "selector" in value:
-				selector = re.compile(value["selector"])
-				match = selector.search(obj)
-				if match is not None:
-					obj = match.group(0)
-				else:
-					logMsg = "TransformationService.processVariables : Error : \n" \
-						+ "Could not find match for selector : '" \
-						+ value["selector"] + "'"
-					self.logger.critical(logMsg)
-					break
-
-			if "format" in value:
-				formatStr = value["format"]
-				obj = formatStr.format(obj)
-			else:
-				obj = str(obj)
-			results[key] = obj
-
-		self.logger.debug("Variables: ")
-		for key in results.keys():
-			value = results[key]
-			self.logger.debug(key + " : " + str(results[key]))
-
-		return results
-
+	
 	def generateMessage(self, address, template, variables):
 
 		self.logger.debug("TransformationService.generateMessge : ")

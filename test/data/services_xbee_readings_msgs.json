@@ -1,7 +1,8 @@
 {
 	"messages" : [
 		{"supply_voltage": {"units": "volts", "value": 2.6087976539589444}, "time_stamp": "2015-11-15T16:28:19", "readings": {"temperature": {"units": "degrees F", "value": 83.2551319648094}}, "name": "WeatherSensor", "address": "0013 a200 408b 4307"},
-		{"supply_voltage": {"units": "volts", "value": 2.6087976539589444}, "time_stamp": "2015-11-15T16:33:27", "readings": {"temperature": {"units": "degrees F", "value": 82.83284457478005}}, "name": "WeatherSensor", "address": "0013 a200 408b 4307"},
-		{"supply_voltage": {"units": "volts", "value": 2.6087976539589444}, "time_stamp": "2015-11-15T16:28:19", "readings": {"temperature": {"units": "degrees F", "value": 83.2551319648094}}, "name": "WeatherSensor", "address": "0013 a200 408b 4307"}
+		{"supply_voltage": {"units": "volts", "value": 2.4932976539589444}, "time_stamp": "2015-11-15T16:33:27", "readings": {"temperature": {"units": "degrees F", "value": 82.83284457478005}}, "name": "WeatherSensor", "address": "0013 a200 408b 4307"},
+		{"supply_voltage": {"units": "volts", "value": 2.3532976539589444}, "time_stamp": "2015-11-15T16:38:19", "readings": {"temperature": {"units": "degrees F", "value": 83.2551319648094}}, "name": "WeatherSensor", "address": "0013 a200 408b 4307"},
+		{"supply_voltage": {"units": "volts", "value": 2.3432976539589444}, "time_stamp": "2015-11-15T16:43:19", "readings": {"temperature": {"units": "degrees F", "value": 83.2551319648094}}, "name": "WeatherSensor", "address": "0013 a200 408b 4307"}
 	]
 }

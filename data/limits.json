@@ -1,0 +1,32 @@
+{
+	"supply_voltage" : {
+		"topic" : "services.xbee.readings",
+		"variables" : {
+			"${SUPPVOLTS}" : { 
+				"path" : "supply_voltage.value",
+			    "format" : "{0:03.2f}" 
+			},
+			"${ADDR}" : { 
+				"path" : "address" 
+			},
+			"${TIME}" : {
+				"path" : "time_stamp",
+				"selector" : "[012][0-9]:[0-5][0-9]:[0-5][0-9]"
+			}
+		},	
+		"limits" : {
+			"Warning" : {
+				"op" : "lt",
+				"value" : "2.5",
+				"variable" : "${SUPPVOLTS}",
+				"message" : "Warning : Supply voltage getting low: ${SUPPVOLTS} volts @ ${TIME}"
+			},
+			"Critical" : {
+				"op" : "lt",
+				"value" : "2.35",
+				"variable" : "${SUPPVOLTS}",
+				"message" : "Critical : Supply voltage near exhaustion : ${SUPPVOLTS} volts @ {TIME}"
+			}			
+		}
+	}
+}

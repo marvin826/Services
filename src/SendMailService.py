@@ -1,4 +1,5 @@
 from ServiceBase import ServiceBase
+from VariableProcessor import VariableProcessor
 import smtplib
 import email.utils
 from email.mime.text import MIMEText
@@ -14,6 +15,7 @@ class SendMailService(ServiceBase):
 		self.accounts = None
 		self.templates = None
 		self.templateDir = None
+		self.varProcessor = None
 
 	def init(self):
 		super(SendMailService, self).init()
@@ -39,6 +41,9 @@ class SendMailService(ServiceBase):
 				+ "\' does not exist")
 			return
 		
+		self.varProcessor = VariableProcessor()
+		self.varProcessor.init(self.logger)
+
 		self.loadConfiguration()		
 
 	def loadConfiguration(self):
@@ -106,7 +111,7 @@ class SendMailService(ServiceBase):
 
 				template = self.templates[message]
 				if "variables" in template :
-					variables = self.processVariables(template["variables"],msgObj)
+					variables = self.varProcessor.processVariables(template["variables"],msgObj)
 				else:
 					self.logger.critical("SendMailService.onMessage : " \
 						+ "Error : variables not provided in template for : " \
@@ -155,63 +160,4 @@ class SendMailService(ServiceBase):
 		self.argumentParser.add_argument('--templateDir',
 									     required=True,
 									     help="Directory of template files")
-
-
-		
-	def processVariables(self, variables, msg):
-		
-		self.logger.debug("SendMail.processVariables")
-		self.logger.debug(body)
-
-		results = {}
-		self.logger.debug("Variables before: ")
-		for key in variables.keys():
-			value = variables[key]
-			self.logger.debug(key + " : " + str(variables[key]))
-
-			path = None
-			if "path" in value:
-				path = value["path"]
-			else:
-				logMsg = "SendMail.processVariables : Error : \n" \
-				         + "\"path\" not found in variable description."
-				self.logger.critical(logMsg)
-
-			path = string.split(path, '.')
-			obj = msg
-			for token in path:
-				if token in obj:
-					obj = obj[token]
-				else:
-					logMsg = "SendMail.processVariables : Error : \n" \
-						+ "'" + token + "' token from path '" + value \
-						+ "' not found in message : " + str(msg)
-					self.logger.critical(logMsg)
-					break
-
-			if "selector" in value:
-				selector = re.compile(value["selector"])
-				match = selector.search(obj)
-				if match is not None:
-					obj = match.group(0)
-				else:
-					logMsg = "SendMail.processVariables : Error : \n" \
-						+ "Could not find match for selector : '" \
-						+ value["selector"] + "'"
-					self.logger.critical(logMsg)
-					break
-
-			if "format" in value:
-				formatStr = value["format"]
-				obj = formatStr.format(obj)
-			else:
-				obj = str(obj)
-			results[key] = obj
-
-		self.logger.debug("Variables: ")
-		for key in results.keys():
-			value = results[key]
-			self.logger.debug(key + " : " + str(results[key]))
-
-		return results
 

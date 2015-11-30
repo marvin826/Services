@@ -16,6 +16,10 @@ class LimitsService(ServiceBase):
 		                   "ge" : self.greaterThanEqual,
 		                   "in" : self.within,
 		                   "out" : self.outside }
+		self.params = [ "op", 
+		                "limit", 
+		                "variable", 
+		                "message" ]
 	def init(self):
 		super(LimitsService, self).init()
 
@@ -70,8 +74,6 @@ class LimitsService(ServiceBase):
 			           "variables" : setObj["variables"] }
 			self.subscribedTopics[topic].append(limits)
 
-		self.logger.info(self.subscribedTopics)
-
 	def onConnect(self, client, userdata, rc):
 		self.logger.info("LimitsService.onConnect")
 
@@ -86,7 +88,7 @@ class LimitsService(ServiceBase):
 				self.logger.critical(logMsg)
 
 	def onMessage(self, client, userdata, msg):
-		self.logger.info("LimitsService.onMessage")
+		self.logger.debug("LimitsService.onMessage")
 		
 		if msg.topic not in self.subscribedTopics:
 			logMsg = "LimitsService.onMessage : Received topic " \
@@ -108,7 +110,7 @@ class LimitsService(ServiceBase):
 				return
 			variables = vp.processVariables(limit["variables"], msgObj)
 
-			self.logger.info("LimitsService.onMessage : variables : " + str(variables))
+			self.logger.debug("LimitsService.onMessage : variables : " + str(variables))
 
 			# process the limits
 			if "limits" not in limit:
@@ -129,61 +131,127 @@ class LimitsService(ServiceBase):
 										 help="File that specifies the limits to be monitored")
 
 	def lessThan(self, limit, value):
+		self.logger.debug("LimitsService.lessThan : " + str(limit) + "," + str(value))
 		if value < limit:
 			return True
 		return False
 
 	def greaterThan(self, limit, value):
+		self.logger.debug("LimitsService.greaterThan : " + str(limit) + "," + str(value))
 		if value > limit:
 			return True
 		return False
 
-	def within(self, lower, higher, value):
-		if value >= lower and value <= higher:
+	def within(self, lower, upper, value):
+		self.logger.debug("LimitsService.within : " + str(lower) + "," + str(upper) \
+			+ "," + str(value))
+		if value >= lower and value <= upper:
 			return True
 		return False
 
-	def outside(self, lower, higher, value):
-		if value < lower or value > higher:
+	def outside(self, lower, upper, value):
+		self.logger.debug("LimitsService.outside : " + str(lower) + "," + str(upper) \
+			+ "," + str(value))
+		if value < lower or value > upper:
 			return True
 		return False
 
 	def equal(self, limit, value):
+		self.logger.debug("LimitsService.equal : " + str(limit) + "," + str(value))
 		if value == limit:
 			return True
 		return False
 
 	def lessThanEqual(self, limit, value):
+		self.logger.debug("LimitsService.lessThanEqual : " + str(limit) + "," + str(value))
 		if value <= limit:
 			return True
 		return False
 
 	def greaterThanEqual(self, limit, value):
+		self.logger.debug("LimitsService.greaterThanEqual : " + str(limit) + "," + str(value))
 		if value >= limit:
 			return True
 		return False
 
 	def processLimits(self, limits, variables):
-		self.logger.info("LimitsService:processLimits")
+		self.logger.debug("LimitsService:processLimits")
 
 		for key in limits:
 			desc = limits[key]
+			self.logger.debug("LimitsService.processLimits : " \
+				+ "Processing " + str(key) + " : " + str(desc))
 
-			params = [ "op", "value", "variable", "message" ]
-			for param in params:
+			for param in self.params:
+				
 				if param not in desc:
-				logMsg = "LimitsService.processLimits : Error : " \
-				    + param + " parameter not provided in limit : " + key
-				return
-
-				if desc["op"] not in self.operators:
 					logMsg = "LimitsService.processLimits : Error : " \
-						+ desc["op"] + " is not a valid operator."
+					    + param + " parameter not provided in limit : " + key
+					self.logger.critical(logMsg)
 					return
 
-				func = self.operators[desc["op"]]
+			if desc["op"] not in self.operators:
+				logMsg = "LimitsService.processLimits : Error : " \
+					+ desc["op"] + " is not a valid operator : " + key
+				self.logger.critical(logMsg)
+				return
 
-				if 
-				var = variables[desc["variable"]]
+			self.logger.debug("LimitsService.processLimits : op : " + desc["op"])
+			func = self.operators[desc["op"]]
 
+			if desc["variable"] not in variables:
+				logMsg = "LimitsService.processLimits : Error : " \
+					+ "Variable " + desc["variable"] + " from limit " + key \
+					+ " not found in message."
+				self.logger.critical(logMsg)
+				return
+
+			value = 0.0
+			try:
+				value = float(variables[desc["variable"]])
+			except Exception, e:
+				logMsg = "LimitsService.processLimits : Error : " \
+					+ "Error converting variable " + desc["variable"] + " value : " \
+					+ variables[desc["variables"]] + " : " + str(e)
+				self.logger.critical(logMsg)
+
+			status = False
+			limit = desc["limit"]
+			if type(limit) is not list:
+				logMsg = "LimitsService.processLimits : Error : " \
+					+ "\"limit\" parameter is not a list : " + limit
+				self.logger.critical(logMsg)
+				return
+
+			if len(limit) == 1 :				
+				try:
+					limit = float(limit[0])
+				except Exception, e:
+					logMsg = "LimitsService.processLimits : Error : " \
+						+ "Error converting limit " + key + " value : " \
+						+ limit[i] + " : " + str(e)
+					self.logger.critical(logMsg)
+					return
+
+				status = func(limit,value)
+
+			elif len(limit) == 2 : 
+
+				for i in [0,1]:
+					try:
+						limit[i] = float(limit[i])
+					except Exception, e:
+						logMsg = "LimitsService.processLimits : Error : " \
+							+ "Error converting limit " + key + " value : " \
+							+ limit[i] + " : " + str(e)
+						self.logger.critical(logMsg)
+						return
+
+				status = func(limit[0],limit[1],value)
+
+
+			if status:
+				logMsg = "LimitsService.processLimits : Limit met : " \
+					+ key + " : " + str(desc["op"]) + "(" + str(limit) + "," + str(value) + ")"
+				self.logger.info(logMsg)
 

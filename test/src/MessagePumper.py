@@ -77,7 +77,7 @@ def publishMessage():
 	client.publish(arguments.messageQueue, str(msg))
 
 	if not q.empty() :
-		t = threading.Timer(arguments.publishPeriod, publishMessage)
+		t = threading.Timer(float(arguments.publishPeriod), publishMessage)
 		t.start()
 	else:
 		print "message queue empty..."

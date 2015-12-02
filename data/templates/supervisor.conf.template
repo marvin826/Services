@@ -131,21 +131,35 @@ command=python ${ROOTDIR}/src/TwitterServiceTester.py \
 stderr_logfile = ${LOGDIR}/twitter_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
 stdout_logfile = ${LOGDIR}/twitter_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 
+; Sendmail Service
+[program:sendmail_service]
+command=python ${ROOTDIR}/src/SendMailServiceTester.py \
+                  --logFile ${LOGDIR}/sendmail_log_${DTSTAMP="%Y%m%d%H%M"}.log \
+                  --loggingLevel "DEBUG" \
+                  --inputQueueTopic "services.sendmail" \
+                  --queueAddress "127.0.0.1" \
+                  --queuePort 5250 \
+                  --configFile ${DATADIR}/sendmail.json \
+                  --templateDir ${DATADIR}/templates
+stderr_logfile = ${LOGDIR}/sendmail_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
+stdout_logfile = ${LOGDIR}/sendmail_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
+
 ; Limits Service
 [program:limits_service]
 command=python ${ROOTDIR}/src/LimitsServiceTester.py \
                   --logFile ${LOGDIR}/limits_log_${DTSTAMP="%Y%m%d%H%M"}.log \
-                  --loggingLevel "INFO" \
+                  --loggingLevel "DEBUG" \
                   --inputQueueTopic "services.limits" \
                   --queueAddress "127.0.0.1" \
                   --queuePort 5250 \
+                  --outputQueueTopic services.sendmail \
                   --limitsFile ${DATADIR}/limits.json
 stderr_logfile = ${LOGDIR}/limits_stderr_${DTSTAMP="%Y%m%d%H%M"}.out
 stdout_logfile = ${LOGDIR}/limits_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 
 
 [group:services]
-programs=transformation_service,weather_service,twitter_service,xbee_endpoint_service,garage_service,limits_service
+programs=transformation_service,weather_service,twitter_service,xbee_endpoint_service,garage_service,limits_service, sendmail_service
 
 ; The below sample program section shows all possible program subsection values,
 ; create one or more 'real' program: sections to be able to control them under

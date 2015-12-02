@@ -18,14 +18,12 @@
 			"Warning" : {
 				"op" : "in",
 				"limit" : [2.35, 2.5],
-				"variable" : "${SUPPVOLTS}",
-				"message" : "Warning : Supply voltage getting low: ${SUPPVOLTS} volts @ ${TIME}"
+				"variable" : "${SUPPVOLTS}"
 			},
 			"Critical" : {
 				"op" : "lt",
 				"limit" : [2.35],
-				"variable" : "${SUPPVOLTS}",
-				"message" : "Critical : Supply voltage near exhaustion : ${SUPPVOLTS} volts @ {TIME}"
+				"variable" : "${SUPPVOLTS}"
 			}			
 		}
 	}

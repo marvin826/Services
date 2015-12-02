@@ -16,10 +16,12 @@ class LimitsService(ServiceBase):
 		                   "ge" : self.greaterThanEqual,
 		                   "in" : self.within,
 		                   "out" : self.outside }
+		self.setParams = [ "topic",
+							"limits", 
+							"variables" ]
 		self.params = [ "op", 
 		                "limit", 
-		                "variable", 
-		                "message" ]
+		                "variable" ]
 	def init(self):
 		super(LimitsService, self).init()
 
@@ -29,10 +31,12 @@ class LimitsService(ServiceBase):
 		limitsFile = self.arguments.limitsFile
 		self.loadConfiguration(limitsFile)
 
+		self.logger.info("LimitsService.init : Output topic : " + self.arguments.outputQueueTopic)
+
 	def loadConfiguration(self, filename):
 		confObj = None
 		try:
-			self.logger.info("LimitsService.init : Loading config file : " \
+			self.logger.info("LimitsService.loadConfiguration : Loading config file : " \
 				      + filename)
 			cfile = open(filename)
 			confObj = json.load(cfile)
@@ -47,23 +51,14 @@ class LimitsService(ServiceBase):
 		for namedLimitSet in confObj.keys():
 
 			setObj = confObj[namedLimitSet]
-			if "topic" not in setObj:
-				msg = "LimitsService.loadConfiguration : Error : " \
-				   	  + "\"topic\" not found in limit set: " + limitSet
-				self.logger.critical(msg)
-				return
 
-			if "variables" not in setObj:
-				msg = "LimitsService.loadConfiguration : Error : " \
-				   	  + "\"variables\" not found in limit set: " + limitSet
-				self.logger.critical(msg)
-				return
-				
-			if "limits" not in setObj:
-				msg = "LimitsService.loadConfiguration : Error : " \
-				   	  + "\"limits\" not found in limit set: " + limitSet
-				self.logger.critical(msg)
-				return
+			# make sure all the limit set parameters have been specified
+			for param in self.setParams:
+				if param not in setObj:
+					msg = "LimitsService.loadConfiguration : Error : " \
+					   	  + param + " not found in limit set: " + namedLimitSet
+					self.logger.critical(msg)
+					return
 
 			topic = setObj["topic"]
 			if topic not in self.subscribedTopics:
@@ -120,7 +115,7 @@ class LimitsService(ServiceBase):
 			limits = limit["limits"]
 
 			# now that we have the variables, we can process the limits
-			self.processLimits(limits, variables)
+			self.processLimits(limits, variables, msgObj)
 
 
 	def addArguments(self):
@@ -129,6 +124,18 @@ class LimitsService(ServiceBase):
 		self.argumentParser.add_argument('--limitsFile',
 										 required=True,
 										 help="File that specifies the limits to be monitored")
+
+	def publishMessage(self, msgObj) :
+		self.logger.debug("LimitsService.publishMessage")
+
+		try:
+			self.client.publish(self.arguments.outputQueueTopic,json.dumps(msgObj))
+		except Exception, e:
+			logMsg = "LimitsService.publishMessage : Error publishing limit message : " \
+				+ str(e)
+			self.logger.critical(logMsg)
+
+		return
 
 	def lessThan(self, limit, value):
 		self.logger.debug("LimitsService.lessThan : " + str(limit) + "," + str(value))
@@ -174,7 +181,7 @@ class LimitsService(ServiceBase):
 			return True
 		return False
 
-	def processLimits(self, limits, variables):
+	def processLimits(self, limits, variables, msgObj):
 		self.logger.debug("LimitsService:processLimits")
 
 		for key in limits:
@@ -251,7 +258,5 @@ class LimitsService(ServiceBase):
 
 
 			if status:
-				logMsg = "LimitsService.processLimits : Limit met : " \
-					+ key + " : " + str(desc["op"]) + "(" + str(limit) + "," + str(value) + ")"
-				self.logger.info(logMsg)
+				self.publishMessage(msgObj)
 

@@ -2,8 +2,10 @@ from ServiceBase import ServiceBase
 from VariableProcessor import VariableProcessor
 import smtplib
 import email.utils
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import json
+import string
 import os
 
 class SendMailService(ServiceBase):
@@ -13,7 +15,7 @@ class SendMailService(ServiceBase):
 
 		self.mailConfig = None
 		self.accounts = None
-		self.templates = None
+		self.templates = {}
 		self.templateDir = None
 		self.varProcessor = None
 
@@ -48,7 +50,7 @@ class SendMailService(ServiceBase):
 
 	def loadConfiguration(self):
 
-		self.logger.info("SendMailService.loadConfiguration")
+		self.logger.debug("SendMailService.loadConfiguration")
 
 		# make sure the right items where loaded from the file
 		if "accounts" not in self.mailConfig :
@@ -79,7 +81,7 @@ class SendMailService(ServiceBase):
 		# we reference the templates by the template name
 		# provided in the json object
 		for template in self.mailConfig["templates"] :
-			self.accounts[template["name"]] = template
+			self.templates[template["name"]] = template
 
 			# get the file name of the template to use and load it
 			# in. We store the contents of the template as a string
@@ -100,18 +102,19 @@ class SendMailService(ServiceBase):
 				return
 
 	def onMessage(self, client, userdata, msg):
-		super(SendMailService, self).onMessage(client, userdata, msg)
 		self.logger.debug("SendMailService.onMessage : " + str(msg.payload))
 		msgObj = json.loads(msg.payload)
 
+		body = "Error : Message not generated"
 		if "message" in msgObj : 
 			message = msgObj["message"]
 
 			if message in self.templates :
 
 				template = self.templates[message]
+
 				if "variables" in template :
-					variables = self.varProcessor.processVariables(template["variables"],msgObj)
+					variables = self.varProcessor.processVariables(template["variables"],msgObj["content"])
 				else:
 					self.logger.critical("SendMailService.onMessage : " \
 						+ "Error : variables not provided in template for : " \
@@ -127,7 +130,7 @@ class SendMailService(ServiceBase):
 					return
 
 				if "account" in template:
-					self.sendMail(template["account"], body)
+					self.sendMail(template, body)
 				else:
 					self.logger.critical("SendMailService.onMessage : " \
 						+ "Error : \"account\" not found in template for : " \
@@ -143,12 +146,40 @@ class SendMailService(ServiceBase):
 			return
 
 	def generateMessage(self, template, variables):
-		self.logger.info("SendMailService.generateMessage")
-		pass
+		self.logger.debug("SendMailService.generateMessage")
 
-	def sendMail(self, account, body):
-		self.logger.info("SendMailService.sendMail")
-		pass
+		message = template
+		for key in variables.keys():
+			message = string.replace(message, str(key), str(variables[key]))
+
+		return message
+
+	def sendMail(self, template, body):
+		self.logger.debug("SendMailService.sendMail")
+
+		accountInfo = self.accounts[template["account"]]
+
+		msg = MIMEMultipart()
+		msg["From"] = accountInfo["from_addr"]
+		msg["To"] = accountInfo["to_addr"]
+		msg["Subject"] = template["subject"]
+		msg.attach(MIMEText(body, 'plain'))
+
+		self.logger.debug(msg)
+		
+		try:
+			server = smtplib.SMTP(accountInfo["server"])
+			if "username" in accountInfo and "password" in accountInfo:
+				server.starttls()
+				server.login(accountInfo["username"], accountInfo["password"])
+
+			server.sendmail(accountInfo["from_addr"], accountInfo["to_addr"], msg.as_string())
+			server.quit()
+
+		except Exception, e:
+			logMsg = "SendMailService.sendMail: Error sending : " + str(e)
+			self.logger.critical(logMsg)
+
 		
 	def addArguments(self):
 		super(SendMailService, self).addArguments()

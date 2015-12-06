@@ -114,8 +114,13 @@ class LimitsService(ServiceBase):
 				return
 			limits = limit["limits"]
 
+			if "name" not in limit:
+				logMsg = "LimitsService.onMessage : Error : \"name\" not found."
+				self.logger.critical(logMsg)
+				return
+
 			# now that we have the variables, we can process the limits
-			self.processLimits(limits, variables, msgObj)
+			self.processLimits(limit["name"], limits, variables, msgObj)
 
 
 	def addArguments(self):
@@ -125,11 +130,16 @@ class LimitsService(ServiceBase):
 										 required=True,
 										 help="File that specifies the limits to be monitored")
 
-	def publishMessage(self, msgObj) :
+	def publishMessage(self, topic, msgObj, key, desc) :
 		self.logger.debug("LimitsService.publishMessage")
 
 		try:
-			self.client.publish(self.arguments.outputQueueTopic,json.dumps(msgObj))
+			msg = { "message" : topic,
+					"content" : msgObj,
+			        "limit" : key,
+			        "description" : desc
+			      }
+			self.client.publish(self.arguments.outputQueueTopic,json.dumps(msg))
 		except Exception, e:
 			logMsg = "LimitsService.publishMessage : Error publishing limit message : " \
 				+ str(e)
@@ -181,7 +191,7 @@ class LimitsService(ServiceBase):
 			return True
 		return False
 
-	def processLimits(self, limits, variables, msgObj):
+	def processLimits(self, topic, limits, variables, msgObj):
 		self.logger.debug("LimitsService:processLimits")
 
 		for key in limits:
@@ -258,5 +268,5 @@ class LimitsService(ServiceBase):
 
 
 			if status:
-				self.publishMessage(msgObj)
+				self.publishMessage(topic, msgObj, key, desc)
 

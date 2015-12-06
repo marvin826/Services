@@ -135,7 +135,7 @@ stdout_logfile = ${LOGDIR}/twitter_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 [program:sendmail_service]
 command=python ${ROOTDIR}/src/SendMailServiceTester.py \
                   --logFile ${LOGDIR}/sendmail_log_${DTSTAMP="%Y%m%d%H%M"}.log \
-                  --loggingLevel "DEBUG" \
+                  --loggingLevel "INFO" \
                   --inputQueueTopic "services.sendmail" \
                   --queueAddress "127.0.0.1" \
                   --queuePort 5250 \
@@ -148,7 +148,7 @@ stdout_logfile = ${LOGDIR}/sendmail_stdout_${DTSTAMP="%Y%m%d%H%M"}.out
 [program:limits_service]
 command=python ${ROOTDIR}/src/LimitsServiceTester.py \
                   --logFile ${LOGDIR}/limits_log_${DTSTAMP="%Y%m%d%H%M"}.log \
-                  --loggingLevel "DEBUG" \
+                  --loggingLevel "INFO" \
                   --inputQueueTopic "services.limits" \
                   --queueAddress "127.0.0.1" \
                   --queuePort 5250 \

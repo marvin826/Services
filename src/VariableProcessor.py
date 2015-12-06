@@ -43,8 +43,8 @@ class VariableProcessor(object):
 					obj = obj[token]
 				else:
 					logMsg = "VariableProcessor.processVariables : Error : \n" \
-						+ "'" + token + "' token from path '" + value \
-						+ "' not found in message : " + str(msg)
+						+ "'" + str(token) + "' token from path '" + str(path) \
+						+ "' not found in message : " + str(obj)
 					self.logger.critical(logMsg)
 					break
 

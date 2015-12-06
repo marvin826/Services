@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"Limits",
+				"LimitsService"
+			],
+			[
+				"limit",
+				"limit"
+			],
+			[
+				"Limi",
+				"LimitsService"
+			],
+			[
+				"op",
+				"operators"
+			],
+			[
+				"ou",
+				"outside"
+			],
+			[
+				"wi",
+				"within"
+			],
+			[
+				"gre",
+				"greaterThanEqual"
+			],
+			[
+				"less",
+				"lessThanEqual"
+			],
+			[
+				"eq",
+				"equal"
+			],
+			[
+				"variable",
+				"variable"
+			],
+			[
+				"process",
+				"processLimits"
+			],
+			[
+				"nam",
+				"namedLimitSet"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
+				"sub",
+				"subscribedTopics"
+			],
+			[
+				"su",
+				"subscribedTopics"
+			],
+			[
 				"packetAdd",
 				"packetAddressFilter"
 			],
@@ -220,14 +280,6 @@
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/test/src/MessagePumper.py",
-			"settings":
-			{
-				"buffer_size": 2343,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "/home/gkaiser/Projects/Services/src/ServiceBase.py",
 			"settings":
 			{
@@ -236,26 +288,26 @@
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/data/transformation_rules.json",
+			"file": "/home/gkaiser/Projects/Services/data/limits.json",
 			"settings":
 			{
-				"buffer_size": 579,
+				"buffer_size": 551,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/src/TransformationService.py",
+			"file": "/home/gkaiser/Projects/Services/data/templates/supply_voltage_low.template",
 			"settings":
 			{
-				"buffer_size": 2843,
+				"buffer_size": 156,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/src/LimitCheckService.py",
+			"file": "/home/gkaiser/Projects/Services/src/LimitsService.py",
 			"settings":
 			{
-				"buffer_size": 1173,
+				"buffer_size": 7933,
 				"line_ending": "Unix"
 			}
 		},
@@ -268,10 +320,10 @@
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/data/limits.json",
+			"file": "/home/gkaiser/Projects/Services/data/templates/supervisor.conf.template",
 			"settings":
 			{
-				"buffer_size": 614,
+				"buffer_size": 13658,
 				"line_ending": "Unix"
 			}
 		},
@@ -284,10 +336,18 @@
 			}
 		},
 		{
-			"file": "/home/gkaiser/Projects/Services/src/LimitCheckServiceTester.py",
+			"file": "/home/gkaiser/Projects/Services/src/LimitsServiceTester.py",
 			"settings":
 			{
-				"buffer_size": 114,
+				"buffer_size": 102,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/gkaiser/Projects/Services/test/data/services_xbee_readings_msgs.json",
+			"settings":
+			{
+				"buffer_size": 1011,
 				"line_ending": "Unix"
 			}
 		}
@@ -328,6 +388,10 @@
 	},
 	"file_history":
 	[
+		"/home/gkaiser/Projects/Services/test/src/MessagePumper.py",
+		"/home/gkaiser/Projects/Services/src/LimitCheckService.py",
+		"/home/gkaiser/Projects/Services/data/templates/supervisor.conf.template",
+		"/home/gkaiser/Projects/Services/data/transformation_rules.json",
 		"/home/gkaiser/Projects/Services/src/TransformationService.py",
 		"/home/gkaiser/Projects/Services/src/TwitterServiceTester.py",
 		"/home/gkaiser/Projects/Services/src/SupplyVoltageServiceTester.py",
@@ -335,7 +399,6 @@
 		"/home/gkaiser/Projects/Services/src/SensorService.py",
 		"/home/gkaiser/Projects/Services/test/data/send_mail_msg.json",
 		"/home/gkaiser/Projects/Services/data/supervisor.conf",
-		"/home/gkaiser/Projects/Services/data/templates/supervisor.conf.template",
 		"/home/gkaiser/Projects/Services/src/GarageServiceTester.py",
 		"/home/gkaiser/Projects/Services/src/GarageService.py",
 		"/home/gkaiser/Projects/Services/src/TwitterService.py",
@@ -345,7 +408,6 @@
 		"/home/gkaiser/Projects/Services/src/SendMailServiceTester.py",
 		"/home/gkaiser/Projects/Services/src/TransformationServiceTester.py",
 		"/home/gkaiser/Projects/Services/data/templates/supply_voltage_low.template",
-		"/home/gkaiser/Projects/Services/data/transformation_rules.json",
 		"/home/gkaiser/Projects/Services/src/XbeeEndpointService.py",
 		"/home/gkaiser/Projects/Services/data/twitter_keys.json",
 		"/home/gkaiser/Projects/Services/test/src/TwitterErrorTest.py",
@@ -451,6 +513,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"value",
+			"info",
+			"higher",
+			"LimitCheck",
 			"LimitCheckService",
 			"supplyVoltage",
 			"SupplyVoltage",
@@ -557,7 +623,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -572,8 +638,8 @@
 						"selection":
 						[
 							[
-								98,
-								98
+								3996,
+								3996
 							]
 						],
 						"settings":
@@ -582,7 +648,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2397.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -599,40 +665,13 @@
 						"selection":
 						[
 							[
-								492,
-								492
+								616,
+								616
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 51.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/home/gkaiser/Projects/Services/test/src/MessagePumper.py",
-					"settings":
-					{
-						"buffer_size": 2343,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2343,
-								2343
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -642,7 +681,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "/home/gkaiser/Projects/Services/src/ServiceBase.py",
 					"settings":
 					{
@@ -653,13 +692,40 @@
 						"selection":
 						[
 							[
-								157,
-								157
+								2777,
+								2777
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 612.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/gkaiser/Projects/Services/data/limits.json",
+					"settings":
+					{
+						"buffer_size": 551,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								380,
+								380
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -670,10 +736,10 @@
 				},
 				{
 					"buffer": 4,
-					"file": "/home/gkaiser/Projects/Services/data/transformation_rules.json",
+					"file": "/home/gkaiser/Projects/Services/data/templates/supply_voltage_low.template",
 					"settings":
 					{
-						"buffer_size": 579,
+						"buffer_size": 156,
 						"regions":
 						{
 						},
@@ -686,35 +752,7 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/home/gkaiser/Projects/Services/src/TransformationService.py",
-					"settings":
-					{
-						"buffer_size": 2843,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								447,
-								447
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -725,23 +763,23 @@
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
-					"buffer": 6,
-					"file": "/home/gkaiser/Projects/Services/src/LimitCheckService.py",
+					"buffer": 5,
+					"file": "/home/gkaiser/Projects/Services/src/LimitsService.py",
 					"settings":
 					{
-						"buffer_size": 1173,
+						"buffer_size": 7933,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								920,
-								920
+								1021,
+								1021
 							]
 						],
 						"settings":
@@ -750,13 +788,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 445.0,
+						"translation.y": 314.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "/home/gkaiser/Projects/Services/src/VariableProcessorTester.py",
 					"settings":
 					{
@@ -767,8 +805,8 @@
 						"selection":
 						[
 							[
-								1560,
-								1560
+								1240,
+								1240
 							]
 						],
 						"settings":
@@ -776,40 +814,41 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 668.0,
+						"translation.y": 867.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "/home/gkaiser/Projects/Services/data/limits.json",
+					"buffer": 7,
+					"file": "/home/gkaiser/Projects/Services/data/templates/supervisor.conf.template",
 					"settings":
 					{
-						"buffer_size": 614,
+						"buffer_size": 13658,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								268,
-								268
+								7701,
+								7701
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 102.0,
+						"translation.y": 2367.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 8,
 					"file": "/home/gkaiser/Projects/Services/src/VariableProcessor.py",
 					"settings":
 					{
@@ -820,8 +859,35 @@
 						"selection":
 						[
 							[
-								485,
-								485
+								596,
+								596
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/home/gkaiser/Projects/Services/src/LimitsServiceTester.py",
+					"settings":
+					{
+						"buffer_size": 102,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								32,
+								32
 							]
 						],
 						"settings":
@@ -829,30 +895,30 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 153.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 10,
-					"file": "/home/gkaiser/Projects/Services/src/LimitCheckServiceTester.py",
+					"file": "/home/gkaiser/Projects/Services/test/data/services_xbee_readings_msgs.json",
 					"settings":
 					{
-						"buffer_size": 114,
+						"buffer_size": 1011,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								114,
-								114
+								759,
+								759
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -896,7 +962,7 @@
 		"rows":
 		[
 			0.0,
-			0.444262295082,
+			0.53825136612,
 			1.0
 		]
 	},

@@ -75,8 +75,8 @@ class GarageService(SensorService):
 			readings["door_b"] = { "value" : doorB }
 			messageObject["readings"] = readings
 
-			self.publishMessage(json.dumps(messageObject), self.outputQueueTopic)
+			self.publishMessage(json.dumps(messageObject), self.arguments.outputQueueTopic)
 
 		except Exception, e: 
 
-			self.logger.critical("GarageService.onMessage : " + str(e))
+			self.logger.critical("GarageService.processMessage : " + str(e))

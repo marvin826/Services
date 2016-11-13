@@ -66,7 +66,7 @@ class SensorService(ServiceBase):
 				self.processMessage(msgObj)
 			else:
 				self.logger.debug("SensorService.onMessage : filtered message : " + \
-					str(msg))
+					str(msg.payload))
 		except Exception, e:
 			self.logger.critical("SensorService.onMessage : Error : " + str(e))
 

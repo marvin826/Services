@@ -16,12 +16,31 @@ class LimitsService(ServiceBase):
 		                   "ge" : self.greaterThanEqual,
 		                   "in" : self.within,
 		                   "out" : self.outside }
+		self.varTypes = [ "float",
+		                  "string", 
+		                  "time",
+		                  "integer" ]
+       	self.limitTypes = [ "last",
+                            "ave",
+                            "max",
+                            "min" ]
 		self.setParams = [ "topic",
-							"limits", 
-							"variables" ]
+						   "limits", 
+						   "variables" ]
 		self.params = [ "op", 
 		                "limit", 
-		                "variable" ]
+		                "variable",
+		                "type" ]
+
+		# keep track of the variables listed in the limits. allows the 
+		# calculation of statistics on each variable over time to allow
+		# more complex limits
+		self.variables = {}
+		self.varStatistics = [ "last",
+		                       "ave", 
+		                       "max",
+		                       "min" ]
+
 	def init(self):
 		super(LimitsService, self).init()
 
@@ -104,6 +123,7 @@ class LimitsService(ServiceBase):
 				self.logger.critical(logMsg)
 				return
 			variables = vp.processVariables(limit["variables"], msgObj)
+			# update the statistics of the variables if their type is "float"
 
 			self.logger.debug("LimitsService.onMessage : variables : " + str(variables))
 
@@ -191,6 +211,7 @@ class LimitsService(ServiceBase):
 			return True
 		return False
 
+	# process the limits for a given topic 
 	def processLimits(self, topic, limits, variables, msgObj):
 		self.logger.debug("LimitsService:processLimits")
 
@@ -223,6 +244,15 @@ class LimitsService(ServiceBase):
 				self.logger.critical(logMsg)
 				return
 
+			if desc["type"] not in self.limitTypes:
+				logMsg = "LimitsService.processLimits : Error : " \
+					+ "Type " + desc["type"] + " from limit " + key \
+					+ " is not a valid limit type."
+				self.logger.critical(logMsg)
+				return
+
+			# grab the value of the variable provided in the message
+			# the value depends on the type given in the limits file
 			value = 0.0
 			try:
 				value = float(variables[desc["variable"]])
